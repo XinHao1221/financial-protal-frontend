@@ -1,15 +1,15 @@
 <template>
-  <general-frame>
+  <div>
     <!-- Header -->
-    <h5 class="mb-3">Sign In</h5>
-    <div class="p-2 scss-text-light">
+    <div class="title mb-3">Sign In</div>
+    <div class="p-2 scss-text-light mb-5">
       Enter username and password to access your financial portal.
     </div>
 
     <!-- Login Form -->
-    <form>
+    <form style="width: 100%">
       <!-- Input fields -->
-      <div v-for="field in fields" :key="field" class="mt-4">
+      <div v-for="field in fields" :key="field" class="mt-3">
         <smart-input :field="field" />
       </div>
 
@@ -17,19 +17,19 @@
       <div class="style-forgot-password">Forgot Password?</div>
 
       <!-- Login button -->
-      <default-button />
+      <default-button class="my-5" button-text="Sign In" @click="login" />
     </form>
-  </general-frame>
+  </div>
 </template>
 
 <script>
 import SmartInput from "../../components/Form/SmartInput.vue";
-import GeneralFrame from "../../components/GeneralFrame.vue";
 import DefaultButton from "../../components/Button/DefaultButton.vue";
+import { useToast } from "vue-toastification";
+
 export default {
   name: "login",
   components: {
-    GeneralFrame,
     SmartInput,
     DefaultButton,
   },
@@ -53,6 +53,9 @@ export default {
         },
       ];
     },
+    login() {
+      useToast().error("I'm a toast!");
+    },
   },
   created() {
     this.setUpForm();
@@ -61,8 +64,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h5 {
-  font-weight: $font_weight;
+.title {
+  font-size: 30px;
+  font-weight: $bold;
+  color: $black;
 }
 
 .style-forgot-password {

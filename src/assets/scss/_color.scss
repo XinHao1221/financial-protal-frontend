@@ -1,6 +1,8 @@
-$primary_color: #5998FF;
+$primary_color: #2dce89;
 $white: #fff;
 $black: #2c3e50;
-
-$light_black: #6C6C6C;
-$border_color: #AFAFAF;
+$light_black: #6c6c6c;
+$border_color: #afafaf;
+.scss-primary-color {
+    color: $primary_color;
+}

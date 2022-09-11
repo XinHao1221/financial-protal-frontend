@@ -28,9 +28,13 @@ export default {
 
 <style lang="scss" scoped>
 .input-label {
-  font-weight: $font-weight;
+  font-weight: $bold;
   text-align: start;
   margin-bottom: 2px;
+}
+
+input[type="text"] {
+  border-color: rgb(197, 197, 197);
 }
 
 input:focus {
