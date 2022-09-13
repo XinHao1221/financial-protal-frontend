@@ -8,16 +8,16 @@
 
 <script>
 export default {
-  name: "DefaultButton",
+  name: 'DefaultButton',
   props: {
     buttonText: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {};
-  },
+  }
 };
 </script>
 

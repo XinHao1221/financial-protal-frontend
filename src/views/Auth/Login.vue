@@ -7,59 +7,62 @@
     </div>
 
     <!-- Login Form -->
-    <form style="width: 100%">
+    <div style="width: 100%">
       <!-- Input fields -->
-      <div v-for="field in fields" :key="field" class="mt-3">
-        <smart-input :field="field" />
-      </div>
+      <smart-input
+        label="Email Address"
+        placeholder="Email Address"
+        class="mt-3"
+        v-model:value="email"
+      />
+      <smart-input
+        type="password"
+        label="Password"
+        placeholder="Password"
+        class="mt-3"
+        v-model:value="password"
+      />
 
       <!-- Forgot password -->
       <div class="style-forgot-password">Forgot Password?</div>
 
       <!-- Login button -->
       <default-button class="my-5" button-text="Sign In" @click="login" />
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
-import SmartInput from "../../components/Form/SmartInput.vue";
-import DefaultButton from "../../components/Button/DefaultButton.vue";
-import { useToast } from "vue-toastification";
+import SmartInput from '../../components/Form/SmartInput.vue';
+import DefaultButton from '../../components/Button/DefaultButton.vue';
+import { useToast } from 'vue-toastification';
+import { authRepo } from '@/api';
 
 export default {
-  name: "login",
+  name: 'login',
   components: {
     SmartInput,
-    DefaultButton,
+    DefaultButton
   },
   data() {
     return {
-      fields: [],
+      email: null,
+      password: null
     };
   },
   methods: {
-    setUpForm() {
-      this.fields = [
-        {
-          type: "text",
-          label: "Email Address",
-          placeholder: "Email Address",
-        },
-        {
-          type: "text",
-          label: "Password",
-          placeholder: "Password",
-        },
-      ];
-    },
-    login() {
-      useToast().error("I'm a toast!");
-    },
-  },
-  created() {
-    this.setUpForm();
-  },
+    async login() {
+      try {
+        await authRepo.login({
+          email: this.email,
+          password: this.password
+        });
+      } catch (error) {
+        console.log(error);
+        useToast().error('Invalid login details');
+      }
+    }
+  }
 };
 </script>
 
