@@ -7,6 +7,10 @@ $box-rounded: 10px;
     padding-inline: 10px;
 }
 
+.scss-rounded-container {
+    border-radius: 10px;
+}
+
 .scss-clickable {
     transition: 0.3s;
     user-select: none;

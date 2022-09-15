@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
 
 const routes = [
   // {
@@ -18,7 +17,6 @@ const routes = [
   // },
   {
     path: "/",
-    redirect: "/login",
     component: () => import("@/AuthLayout.vue"),
     children: [
       {
@@ -30,12 +28,17 @@ const routes = [
   },
   {
     path: "/",
-    component: () => import("@/App.vue"),
+    component: () => import("@/MainLayout.vue"),
     children: [
       {
-        path: "/home",
+        path: "home",
         name: "home",
-        component: Home,
+        component: () => import("../views/Home/index.vue"),
+      },
+      {
+        path: "transaction",
+        name: "transaction",
+        component: () => import("../views/Transaction/index.vue"),
       },
     ],
   },

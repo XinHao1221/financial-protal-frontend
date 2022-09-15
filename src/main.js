@@ -6,6 +6,7 @@ import store from './store';
 
 import 'vue-toastification/dist/index.css';
 import Toast from 'vue-toastification';
+// import '@/assets/scss/_toasts.scss';
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';

@@ -1,5 +1,4 @@
 import ApiClient from '@/api/ApiClient';
-import { useToast } from 'vue-toastification';
 
 class BaseRepository {
   // constructor(resource) {
@@ -11,12 +10,20 @@ class BaseRepository {
       const response = await ApiClient.post(url, payload);
       return response;
     } catch (error) {
-      if (!error.response) {
-        // network error
-        useToast().error('Opps Something went wrong. Please try again.');
-      }
-      return error;
+      return this.handleErrors(error);
     }
+  }
+
+  handleErrors(error) {
+    let errorMessage = 'Opps Something went wrong. Please try again.';
+
+    if (error.response) {
+      errorMessage = error.response.data.message;
+    }
+
+    return Promise.reject({
+      message: errorMessage
+    });
   }
 }
 

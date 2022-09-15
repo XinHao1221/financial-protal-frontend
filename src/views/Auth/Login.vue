@@ -37,6 +37,7 @@ import SmartInput from '../../components/Form/SmartInput.vue';
 import DefaultButton from '../../components/Button/DefaultButton.vue';
 import { useToast } from 'vue-toastification';
 import { authRepo } from '@/api';
+import { setToken } from '@/api/AuthTokenService.js';
 
 export default {
   name: 'login',
@@ -53,13 +54,16 @@ export default {
   methods: {
     async login() {
       try {
-        await authRepo.login({
+        const response = await authRepo.login({
           email: this.email,
           password: this.password
         });
+
+        setToken(response.data.access_token);
+
+        this.$router.push('/home');
       } catch (error) {
-        console.log(error);
-        useToast().error('Invalid login details');
+        useToast().error(error.message);
       }
     }
   }

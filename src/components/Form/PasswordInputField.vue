@@ -1,5 +1,5 @@
 <template>
-  <vue-password classes="scss-input-container" />
+  <vue-password classes="scss-input-container" v-model="password" type="text" />
 </template>
 
 <script>
@@ -10,7 +10,9 @@ export default {
     VuePassword
   },
   data() {
-    return {};
+    return {
+      password: null
+    };
   }
 };
 </script>

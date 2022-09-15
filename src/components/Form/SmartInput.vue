@@ -13,14 +13,14 @@
 
     <!-- Password Input Fields -->
     <!-- <password-input-field v-if="type === 'password'" /> -->
-    <!-- <input
+    <input
       v-if="type === 'password'"
       type="password"
       class="scss-input-container"
       :placeholder="placeholder"
       :value="value"
       @input="$emit('update:value', $event.target.value)"
-    /> -->
+    />
   </div>
 </template>
 
@@ -41,9 +41,6 @@ export default {
       type: String
     },
     value: String
-  },
-  components: {
-    // PasswordInputField
   }
 };
 </script>
