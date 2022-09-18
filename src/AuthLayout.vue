@@ -3,7 +3,9 @@
     <!-- Auth Content -->
     <div class="col-xl-6 col-12">
       <div class="d-flex flex-column container">
-        <div class="logo mt-3">FINS</div>
+        <div class="mt-3">
+          <img src="./assets/images/logo/logo.png" class="logo" />
+        </div>
         <div class="content-container">
           <router-view />
         </div>
@@ -30,7 +32,7 @@ export default {
 }
 
 .content-container {
-  margin-top: 20%;
+  margin-top: 15%;
 }
 
 @media only screen and (max-width: 750px) {
@@ -40,10 +42,15 @@ export default {
 }
 
 .logo {
-  text-align: start;
-  font-size: 30px;
-  font-family: Comic Sans MS;
-  color: $primary_color;
+  display: flex;
+  align-items: left;
+  width: 200px;
+}
+
+@media only screen and (max-width: 500px) {
+  .logo {
+    width: 150px;
+  }
 }
 
 .style-image {
