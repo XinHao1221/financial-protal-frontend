@@ -14,6 +14,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $light_black;
+  font-size: $font_small;
 }
 
 @font-face {

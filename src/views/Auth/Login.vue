@@ -2,7 +2,7 @@
   <div>
     <!-- Header -->
     <div class="title mb-3">Sign In</div>
-    <div class="p-2 scss-text-light mb-5">
+    <div class="p-2 scss-text-light mb-5 scss-text-medium">
       Enter username and password to access your financial portal.
     </div>
 
@@ -72,7 +72,7 @@ export default {
 
 <style lang="scss" scoped>
 .title {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: $bold;
   color: $black;
 }

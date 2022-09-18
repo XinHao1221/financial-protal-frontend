@@ -49,7 +49,7 @@ export default {
 .input-label {
   font-weight: $bold;
   text-align: start;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 input[type='text'] {

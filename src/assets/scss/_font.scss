@@ -1,3 +1,18 @@
 // font size
-$x_large: 24px;
+$font_large: 40px;
+$font_medium: 25px;
+
+$font_small: 18px;
 $bold: bold;
+
+.scss-text-large {
+  font-size: $font_large;
+}
+
+.scss-text-medium {
+  font-size: $font_medium;
+}
+
+.scss-text-small {
+  font-size: $font_small;
+}

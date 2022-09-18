@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: "AuthLayout",
+  name: 'AuthLayout'
 };
 </script>
 
@@ -73,7 +73,7 @@ export default {
   z-index: 2;
   top: 0;
   color: white;
-  font-size: $x_large;
+  font-size: $font_large;
   font-weight: $bold;
   display: flex;
   justify-content: center;

@@ -1,5 +1,5 @@
 <template>
-  <div class="style-menu-container scss-rounded-container scss-white-text">
+  <div class="style-menu-container scss-shadow-container scss-container">
     <!-- Header -->
     <div class="logo text-start">FINS</div>
 
@@ -55,8 +55,7 @@ export default {
   height: 98vh;
   top: 0;
   margin: 1vh;
-  background-color: red;
-  background-image: linear-gradient(#333333, #2a2a2a);
+  // background-image: linear-gradient(#333333, #2a2a2a);
 }
 
 .logo {
@@ -77,18 +76,17 @@ export default {
 
   span {
     margin-left: 15px;
-    font-size: 15px;
     display: flex;
     align-items: center;
   }
 }
 
 .style-menu-item:hover {
-  color: white;
+  // color: white;
   transition: all 0.4s;
 }
 
 .style-menu-item-active {
-  color: $white;
+  // color: $white;
 }
 </style>

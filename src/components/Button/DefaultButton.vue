@@ -23,10 +23,10 @@ export default {
 
 <style lang="scss" scoped>
 .style-button {
-  height: 45px;
+  height: 48px;
   background-color: $primary_color;
   color: white;
   font-weight: $bold;
-  border-radius: $box-rounded;
+  border-radius: 10px;
 }
 </style>
