@@ -1,7 +1,7 @@
 <template>
   <div class="style-menu-container scss-rounded-container scss-white-text">
     <!-- Header -->
-    <div class="logo">FINS</div>
+    <div class="logo text-start">FINS</div>
 
     <!-- Menu Items -->
     <ul>
@@ -60,10 +60,9 @@ export default {
 }
 
 .logo {
-  text-align: center;
   font-size: 20px;
   font-family: Comic Sans MS;
-  padding: 20px 0px;
+  padding: 20px 30px;
   border-bottom: 1px groove $border_color;
   margin-bottom: 10px;
 }

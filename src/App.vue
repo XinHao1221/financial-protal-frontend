@@ -9,11 +9,29 @@ export default {
 </script>
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Myriad Pro';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $light_black;
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('./assets/fonts/MyriadPro/Regular/MyriadPro-Regular.eot');
+  src: url('./assets/fonts/MyriadPro/Regular/MyriadPro-Regular.eot?#iefix')
+      format('embedded-opentype'),
+    url('./assets/fonts/MyriadPro/Regular/MyriadPro-Regular.woff2')
+      format('woff2'),
+    url('./assets/fonts/MyriadPro/Regular/MyriadPro-Regular.woff')
+      format('woff'),
+    url('./assets/fonts/MyriadPro/Regular/MyriadPro-Regular.ttf')
+      format('truetype'),
+    url('./assets/fonts/MyriadPro/Regular/MyriadPro-Regular.svg#MyriadPro-Regular')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 #nav {
