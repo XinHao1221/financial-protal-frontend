@@ -1,16 +1,14 @@
 <template>
   <div id="app">
     <!-- Side Menu  -->
-    <side-menu
-      id="sideMenu"
-      v-if="sideMenu"
-      style="animation-name: myAnimation"
-    />
+    <div class="side-menu" :style="{ display: sideMenuDisplay }">
+      <side-menu @close-sidemenu="toggleSideMenu" />
+    </div>
     <!-- Content  -->
-    <div class="d-flex flex-row">
-      <div style="margin-left: 300px" v-if="sideMenu && $vssWidth > 1000">
-        &nbsp;
-      </div>
+    <div
+      class="d-flex flex-row content"
+      :style="{ marginLeft: contentMarginLeft }"
+    >
       <div class="p-4">
         <div>
           <div class="text-start">
@@ -18,11 +16,8 @@
               class="bi bi-list scss-clickable"
               id="menu-icon"
               style="font-size: 30px; color: white"
-              @click="
-                {
-                  sideMenu = !sideMenu;
-                }
-              "
+              @click="toggleSideMenu"
+              v-if="!isSideMenuOpened"
             ></i>
           </div>
         </div>
@@ -42,18 +37,46 @@ export default {
   mixins: [VueScreenSizeMixin],
   data() {
     return {
-      sideMenu: true
+      sideMenuDisplay: 'block',
+      contentMarginLeft: '310px'
     };
   },
   methods: {
-    toggleSideMenu() {}
+    toggleSideMenu() {
+      this.sideMenuDisplay =
+        this.sideMenuDisplay === 'block' ? 'none' : 'block';
+      if (!this.isMobileSize) {
+        this.contentMarginLeft =
+          this.sideMenuDisplay === 'block' ? '310px' : '0px';
+      }
+    },
+    test() {
+      console.log('here');
+    }
+  },
+  computed: {
+    isMobileSize() {
+      return this.$vssWidth <= 1000 ? true : false;
+    },
+    isSideMenuOpened() {
+      return this.sideMenuDisplay === 'block';
+    }
   },
   watch: {
-    $vssWidth(value) {
-      if (value >= 1000 && this.sideMenu != false) {
-        this.sideMenu = true;
+    // $vssWidth(value) {
+    //   if (value >= 1000 && this.sideMenu != false) {
+    //     this.sideMenu = true;
+    //   } else {
+    //     if (this.sideMenu != true) this.sideMenu = false;
+    //   }
+    // }
+    isMobileSize(value) {
+      if (value) {
+        this.contentMarginLeft = '0px';
+        this.sideMenuDisplay = 'none';
       } else {
-        if (this.sideMenu != true) this.sideMenu = false;
+        this.contentMarginLeft = '310px';
+        this.sideMenuDisplay = 'block';
       }
     }
   }
@@ -75,19 +98,15 @@ export default {
   );
 }
 
-@keyframes myAnimation {
-  0% {
-    opacity: 1;
-    transform: rotateX(90deg);
-  }
-  50% {
-    opacity: 0.5;
-    transform: rotateX(0deg);
-  }
-  100% {
-    display: none;
-    opacity: 0;
-    transform: rotateX(90deg);
-  }
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+
+.content {
+  margin-left: 310px;
+  transition: 0.5s;
 }
 </style>

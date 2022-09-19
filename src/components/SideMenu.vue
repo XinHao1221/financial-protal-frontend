@@ -1,8 +1,12 @@
 <template>
   <div class="style-menu-container scss-container p-3">
     <!-- Header -->
-    <div class="text-start">
+    <div class="d-flex flex-row">
       <img src="../assets/images/logo/logo.png" class="logo px-1" />
+      <i
+        class="bi bi-arrow-left style-close-icon scss-clickable"
+        @click="$emit('close-sidemenu')"
+      ></i>
     </div>
 
     <div class="separator mb-3 mt-2">&nbsp;</div>
@@ -56,18 +60,18 @@ export default {
           name: 'Transaction',
           iconClass: 'bi bi-cash-coin',
           link: '/transaction',
-          color: '#41cc79',
-          id: 'sidebarTransactions',
-          children: [
-            {
-              name: 'Cash In',
-              link: '/transaction/cash-in'
-            },
-            {
-              name: 'Cash Out',
-              link: '/transaction/cash-out'
-            }
-          ]
+          color: '#41cc79'
+          // id: 'sidebarTransactions',
+          // children: [
+          //   {
+          //     name: 'Cash In',
+          //     link: '/transaction/cash-in'
+          //   },
+          //   {
+          //     name: 'Cash Out',
+          //     link: '/transaction/cash-out'
+          //   }
+          // ]
         }
       ]
     };
@@ -87,13 +91,11 @@ export default {
   margin: auto;
 }
 .style-menu-container {
-  position: sticky !important;
   width: 280px;
-  top: 0;
-  left: 0;
   height: 96vh;
   margin: 2vh;
   overflow: auto;
+  overflow-x: hidden;
   // background-image: linear-gradient(#333333, #2a2a2a);
 }
 
@@ -123,5 +125,13 @@ export default {
 }
 
 .collapse {
+}
+
+.style-close-icon {
+  flex-grow: 1;
+  text-align: end;
+  margin: auto 0;
+  font-size: 20px;
+  -webkit-text-stroke: 1px;
 }
 </style>
