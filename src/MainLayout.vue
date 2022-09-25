@@ -92,11 +92,8 @@ export default {
 
 <style scoped lang="scss">
 #app {
-  /* background-color: rgb(245, 245, 245); */
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  // background-image: linear-gradient($primary_color, #4be6a3);
+  min-width: 100vw;
+  min-height: 100vh;
   background: linear-gradient(
     $primary_color 0%,
     #5de2a8 350px,
