@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
   // {
@@ -16,37 +16,37 @@ const routes = [
   //     import(/* webpackChunkName: "about" */ "../views/About.vue"),
   // },
   {
-    path: "/",
-    component: () => import("@/AuthLayout.vue"),
+    path: '/',
+    component: () => import('@/AuthLayout.vue'),
     children: [
       {
-        path: "/login",
-        name: "login",
-        component: () => import("../views/Auth/Login.vue"),
-      },
-    ],
+        path: '/login',
+        name: 'login',
+        component: () => import('../views/Auth/Login.vue')
+      }
+    ]
   },
   {
-    path: "/",
-    component: () => import("@/MainLayout.vue"),
+    path: '/',
+    component: () => import('@/MainLayout.vue'),
     children: [
       {
-        path: "home",
-        name: "home",
-        component: () => import("../views/Home/index.vue"),
+        path: 'home',
+        name: 'home',
+        component: () => import('../views/Home/index.vue')
       },
       {
-        path: "transaction",
-        name: "transaction",
-        component: () => import("../views/Transaction/index.vue"),
-      },
-    ],
-  },
+        path: 'transaction',
+        name: 'transaction',
+        component: () => import('../views/Transaction/index.vue')
+      }
+    ]
+  }
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes,
+  routes
 });
 
 export default router;

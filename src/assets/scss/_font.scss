@@ -1,5 +1,5 @@
 // font size
-$font_large: 40px;
+$font_large: 35px;
 $font_medium: 20px;
 
 $font_small: 17px;
@@ -15,4 +15,8 @@ $bold: bold;
 
 .scss-text-small {
   font-size: $font_small;
+}
+
+.scss-bold {
+  font-weight: $bold;
 }

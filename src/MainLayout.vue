@@ -9,7 +9,15 @@
       class="d-flex flex-row content"
       :style="{ marginLeft: contentMarginLeft }"
     >
-      <div class="p-4">
+      <!-- Screen cover (Appear for mobile view only) -->
+      <div
+        class="screen-cover"
+        v-if="isMobileSize && isSideMenuOpened"
+        @click="toggleSideMenu"
+      >
+        &nbsp;
+      </div>
+      <div class="p-4 flex-grow-1">
         <div>
           <div class="text-start">
             <i
@@ -37,8 +45,8 @@ export default {
   mixins: [VueScreenSizeMixin],
   data() {
     return {
-      sideMenuDisplay: 'block',
-      contentMarginLeft: '310px'
+      sideMenuDisplay: null,
+      contentMarginLeft: null
     };
   },
   methods: {
@@ -49,9 +57,6 @@ export default {
         this.contentMarginLeft =
           this.sideMenuDisplay === 'block' ? '310px' : '0px';
       }
-    },
-    test() {
-      console.log('here');
     }
   },
   computed: {
@@ -63,13 +68,6 @@ export default {
     }
   },
   watch: {
-    // $vssWidth(value) {
-    //   if (value >= 1000 && this.sideMenu != false) {
-    //     this.sideMenu = true;
-    //   } else {
-    //     if (this.sideMenu != true) this.sideMenu = false;
-    //   }
-    // }
     isMobileSize(value) {
       if (value) {
         this.contentMarginLeft = '0px';
@@ -78,6 +76,15 @@ export default {
         this.contentMarginLeft = '310px';
         this.sideMenuDisplay = 'block';
       }
+    }
+  },
+  created() {
+    if (this.isMobileSize) {
+      this.contentMarginLeft = '0px';
+      this.sideMenuDisplay = 'none';
+    } else {
+      this.contentMarginLeft = '310px';
+      this.sideMenuDisplay = 'block';
     }
   }
 };
@@ -92,8 +99,8 @@ export default {
   // background-image: linear-gradient($primary_color, #4be6a3);
   background: linear-gradient(
     $primary_color 0%,
-    #5de2a8 30%,
-    #eef0f2 30%,
+    #5de2a8 350px,
+    #eef0f2 350px,
     #eef0f2 100%
   );
 }
@@ -103,10 +110,24 @@ export default {
   top: 0;
   left: 0;
   height: 100vh;
+  z-index: 100;
+  transition: all 2s linear;
 }
 
 .content {
   margin-left: 310px;
+  transition: 0.5s;
+}
+
+.screen-cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #323232;
+  z-index: 10;
+  opacity: 0.5;
   transition: 0.5s;
 }
 </style>
