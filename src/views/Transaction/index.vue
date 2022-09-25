@@ -2,7 +2,7 @@
   <div>
     <!-- <small-card :settings="incomeCardSettings" /> -->
 
-    <div class="scss-container mt-5" style="padding: 50px">
+    <div class="scss-container mt-5" style="padding: 2rem">
       <vue-good-table
         :columns="columns"
         :rows="rows"

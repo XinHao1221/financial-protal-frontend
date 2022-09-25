@@ -72,7 +72,7 @@ export default {
 
 <style lang="scss" scoped>
 .title {
-  font-size: 40px;
+  font-size: $font_large;
   font-weight: $bold;
   color: $black;
 }

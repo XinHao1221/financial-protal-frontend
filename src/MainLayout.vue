@@ -17,7 +17,7 @@
       >
         &nbsp;
       </div>
-      <div class="p-4 flex-grow-1">
+      <div class="p-4 flex-grow-1 content-overflow-style">
         <div>
           <div class="text-start">
             <i
@@ -92,7 +92,7 @@ export default {
 
 <style scoped lang="scss">
 #app {
-  min-width: 100vw;
+  min-width: 100%;
   min-height: 100vh;
   background: linear-gradient(
     $primary_color 0%,
@@ -126,5 +126,9 @@ export default {
   z-index: 10;
   opacity: 0.5;
   transition: 0.5s;
+}
+
+.content-overflow-style {
+  overflow-x: auto;
 }
 </style>
