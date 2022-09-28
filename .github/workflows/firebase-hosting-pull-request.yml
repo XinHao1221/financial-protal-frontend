@@ -4,13 +4,13 @@
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
 jobs:
-  create_env_file:
+  create_env_file_job:
     runs-on: ubuntu-latest
     steps:
       - name: Create .env file
         uses: ozaytsev86/create-env-file@v1
         with:
-          ENV_VUE_APP_BASE_URL: '${{ secrets.VUE_APP_BASE_URL }}'
+          ENV_VUE_APP_BASE_URL: ${{ secrets.VUE_APP_BASE_URL }}
   build_and_preview:
     if:
       '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
