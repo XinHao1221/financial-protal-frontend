@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: touch .env \
-        echo VUE_APP_BASE_URL="http://127.0.0.1:8000/api/" > .env \
-        cat .env \
+      - run: touch .env 
+        echo VUE_APP_BASE_URL="http://127.0.0.1:8000/api/" > .env 
+        cat .env 
         npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
