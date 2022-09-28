@@ -8,10 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create .env file
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_VUE_APP_BASE_URL: ${{ secrets.VUE_APP_BASE_URL }}
-          file_name: .env
+      - run: echo VUE_APP_BASE_URL="${{ secrets.VUE_APP_BASE_URL }}" > .env
         # uses: ozaytsev86/create-env-file@v1
         # with:
         #   ENV_VUE_APP_BASE_URL: ${{ secrets.VUE_APP_BASE_URL }}
