@@ -91,7 +91,7 @@ export default {
   margin: auto;
 }
 .style-menu-container {
-  width: 280px;
+  width: 250px;
   height: 96vh;
   margin: 2vh;
   overflow: auto;
@@ -100,11 +100,11 @@ export default {
 }
 
 .logo {
-  width: 150px;
+  width: 125px;
 }
 
 .style-menu-item {
-  padding: 15px 20px;
+  padding: 10px 20px;
   color: $black;
 
   i {
@@ -131,7 +131,7 @@ export default {
   flex-grow: 1;
   text-align: end;
   margin: auto 0;
-  font-size: 20px;
+  font-size: $font_small;
   -webkit-text-stroke: 1px;
 }
 </style>

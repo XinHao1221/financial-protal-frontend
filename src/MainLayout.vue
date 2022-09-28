@@ -73,7 +73,7 @@ export default {
         this.contentMarginLeft = '0px';
         this.sideMenuDisplay = 'none';
       } else {
-        this.contentMarginLeft = '310px';
+        this.contentMarginLeft = '270px';
         this.sideMenuDisplay = 'block';
       }
     }
@@ -83,7 +83,7 @@ export default {
       this.contentMarginLeft = '0px';
       this.sideMenuDisplay = 'none';
     } else {
-      this.contentMarginLeft = '310px';
+      this.contentMarginLeft = '270px';
       this.sideMenuDisplay = 'block';
     }
   }
@@ -112,7 +112,7 @@ export default {
 }
 
 .content {
-  margin-left: 310px;
+  margin-left: 270px;
   transition: 0.5s;
 }
 

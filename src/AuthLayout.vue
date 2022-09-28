@@ -44,12 +44,12 @@ export default {
 .logo {
   display: flex;
   align-items: left;
-  width: 200px;
+  width: 150px;
 }
 
 @media only screen and (max-width: 500px) {
   .logo {
-    width: 150px;
+    width: 130px;
   }
 }
 
