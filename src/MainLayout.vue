@@ -55,7 +55,7 @@ export default {
         this.sideMenuDisplay === 'block' ? 'none' : 'block';
       if (!this.isMobileSize) {
         this.contentMarginLeft =
-          this.sideMenuDisplay === 'block' ? '310px' : '0px';
+          this.sideMenuDisplay === 'block' ? '270px' : '0px';
       }
     }
   },
