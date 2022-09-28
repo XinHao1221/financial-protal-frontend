@@ -57,7 +57,7 @@ export default {
           color: '#5eacff'
         },
         {
-          name: 'Transactions',
+          name: 'Transaction',
           iconClass: 'bi bi-cash-coin',
           link: '/transaction',
           color: '#41cc79'
