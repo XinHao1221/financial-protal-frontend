@@ -1,3 +1,5 @@
 export const endpoint = {
-  AUTH: 'auth'
+  AUTH: 'auth',
+  CONSTANT: 'constant',
+  TRANSACTION: 'transaction'
 };

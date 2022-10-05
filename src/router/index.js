@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { getToken } from '../api/AuthTokenService';
+import store from '../store';
 
 const routes = [
   // {
@@ -17,18 +19,25 @@ const routes = [
   // },
   {
     path: '/',
+    redirect: 'login',
     component: () => import('@/AuthLayout.vue'),
     children: [
       {
         path: '/login',
         name: 'login',
-        component: () => import('../views/Auth/Login.vue')
+        component: () => import('../views/Auth/Login.vue'),
+        meta: { hideForAuth: true }
       }
     ]
   },
   {
     path: '/',
     component: () => import('@/MainLayout.vue'),
+    beforeEnter: async (to, from, next) => {
+      await store.dispatch('getConstant', null, { root: true });
+      return next();
+    },
+    meta: { requiresAuth: true },
     children: [
       {
         path: 'home',
@@ -47,6 +56,20 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const hideForAuth = to.matched.some((record) => record.meta.hideForAuth);
+  const isLogin = getToken();
+
+  if (requiresAuth && !isLogin) {
+    next('/login');
+  } else if (hideForAuth && isLogin) {
+    next('/home');
+  } else {
+    next();
+  }
 });
 
 export default router;

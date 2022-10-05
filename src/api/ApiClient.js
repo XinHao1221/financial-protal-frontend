@@ -7,15 +7,14 @@ const baseURL = process.env.VUE_APP_BASE_URL;
 let axiosInstance = axios.create({
   baseURL: baseURL,
   headers: {
-    'Content-type': 'application/json',
-    Accept: 'application/json'
+    'Content-type': 'application/json'
   }
 });
 
-axiosInstance.interceptors.request.use(function(config) {
+axiosInstance.interceptors.request.use(function (config) {
   const token = getToken();
   // set auth token
-  config.headers.Authorization = `Beareer ${token}`;
+  config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 

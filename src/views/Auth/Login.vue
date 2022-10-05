@@ -61,12 +61,14 @@ export default {
 
         setToken(response.data.access_token);
 
+        console.log('here');
         this.$router.push('/home');
       } catch (error) {
         useToast().error(error.message);
       }
     }
-  }
+  },
+  created() {}
 };
 </script>
 
