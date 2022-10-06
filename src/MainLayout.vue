@@ -29,7 +29,8 @@
             ></i>
           </div>
         </div>
-        <router-view />
+        <loading-spinner v-show="!isPageReady" />
+        <router-view @page-ready="setPageStatus" v-show="isPageReady" />
       </div>
     </div>
   </div>
@@ -38,15 +39,17 @@
 <script>
 import SideMenu from './components/SideMenu.vue';
 import { VueScreenSizeMixin } from 'vue-screen-size';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default {
   name: 'MainLayout',
-  components: { SideMenu },
+  components: { SideMenu, LoadingSpinner },
   mixins: [VueScreenSizeMixin],
   data() {
     return {
       sideMenuDisplay: null,
-      contentMarginLeft: null
+      contentMarginLeft: null,
+      isPageReady: false
     };
   },
   methods: {
@@ -57,6 +60,9 @@ export default {
         this.contentMarginLeft =
           this.sideMenuDisplay === 'block' ? '270px' : '0px';
       }
+    },
+    setPageStatus(value) {
+      this.isPageReady = value;
     }
   },
   computed: {
@@ -86,6 +92,10 @@ export default {
       this.contentMarginLeft = '270px';
       this.sideMenuDisplay = 'block';
     }
+
+    this.$router.beforeEach(() => {
+      this.isPageReady = false;
+    });
   }
 };
 </script>
@@ -114,6 +124,8 @@ export default {
 .content {
   margin-left: 270px;
   transition: 0.5s;
+  position: relative;
+  z-index: 0;
 }
 
 .screen-cover {

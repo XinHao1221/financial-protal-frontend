@@ -29,6 +29,8 @@
       <!-- Login button -->
       <default-button class="my-5" button-text="Sign In" @click="login" />
     </div>
+
+    <loading-spinner />
   </div>
 </template>
 
@@ -38,12 +40,14 @@ import DefaultButton from '../../components/Button/DefaultButton.vue';
 import { useToast } from 'vue-toastification';
 import { authRepo } from '@/api';
 import { setToken } from '@/api/AuthTokenService.js';
+import LoadingSpinner from '../../components/LoadingSpinner.vue';
 
 export default {
   name: 'login',
   components: {
     SmartInput,
-    DefaultButton
+    DefaultButton,
+    LoadingSpinner
   },
   data() {
     return {

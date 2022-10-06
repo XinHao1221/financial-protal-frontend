@@ -4,7 +4,11 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created() {
+    const link = document.querySelector("[rel='icon']");
+    link.setAttribute('href', './assets/images/logo/logo-icon.png');
+  }
 };
 </script>
 <style lang="scss">

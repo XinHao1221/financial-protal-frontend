@@ -97,6 +97,9 @@ export default {
         return 'scss-primary-color scss-bold';
       }
     }
+  },
+  created() {
+    // this.$emit('page-ready', true);
   }
 };
 </script>
