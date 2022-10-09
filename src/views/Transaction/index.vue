@@ -4,12 +4,19 @@
 
     <div class="scss-container mt-5" style="padding: 2rem">
       <div class="d-flex flex-row">
-        <smart-input type="text" label="Date Range" />
+        <smart-input
+          type="dateRangePicker"
+          label="Date Range"
+          class="style-date-input"
+          v-model:value="dateRange"
+        />
         <div class="flex-grow-1">&nbsp;</div>
-        <default-button class="style-button">
-          <i class="bi bi-plus-circle" style="font-size: 17px"></i>
-          <span class="ms-2">Add</span>
-        </default-button>
+        <div v-if="!isMobile">
+          <default-button class="style-button">
+            <i class="bi bi-plus-circle" style="font-size: 17px"></i>
+            <span class="ms-2">Add</span>
+          </default-button>
+        </div>
       </div>
 
       <vue-good-table
@@ -45,10 +52,12 @@ import { dateTimeFormat } from '@/common/constant/DateTimeFormat';
 import { mapGetters } from 'vuex';
 import SmartInput from '../../components/Form/SmartInput.vue';
 import DefaultButton from '../../components/Button/DefaultButton.vue';
+import moment from 'moment-timezone';
 
 export default {
   name: 'Transaction',
   components: { VueGoodTable, SmartInput, DefaultButton },
+  inject: ['getIsMobile'],
   data() {
     return {
       incomeCardSettings: {
@@ -83,30 +92,8 @@ export default {
           type: 'number'
         }
       ],
-      rows: [
-        {
-          mode: 'span', // span means this header will span all columns
-          label: 'Monday, 01/09/2022', // this is the label that'll be used for the header
-          html: false, // if this is true, label will be rendered as html
-          children: [
-            {
-              datetime: '2:30am',
-              type: 'Food',
-              account: 'Cash',
-              amount: 120.0,
-              is_income: 0
-            },
-            {
-              datetime: '2:30am',
-              type: 'Food',
-              account: 'Cash',
-              amount: 120.0,
-              is_income: 1
-            }
-          ]
-        }
-      ],
-      transactions: null
+      transactions: null,
+      dateRange: null
     };
   },
   computed: {
@@ -139,16 +126,7 @@ export default {
             label: day,
             ...vueGoodTableSettings,
             children: this.transactions
-              .filter((data) => {
-                console.log(
-                  formatDate({ date: day, format: dayFormat }),
-                  formatDate({
-                    date: data.datetime,
-                    format: dateTimeFormat.API_DATE_TIME_FORMAT
-                  })
-                );
-                return formatDate(day) === formatDate(data.datetime);
-              })
+              .filter((data) => formatDate(day) === formatDate(data.datetime))
               .map((data) => {
                 return {
                   time: formatTime(data.datetime),
@@ -163,6 +141,9 @@ export default {
 
         return acc;
       }, []);
+    },
+    isMobile() {
+      return this.getIsMobile();
     },
     ...mapGetters(['accounts', 'categories'])
   },
@@ -189,11 +170,17 @@ export default {
     getCategory(categoryId) {
       return this.categories.find((category) => category.id === categoryId)
         .name;
+    },
+    setDefaultDateRange() {
+      this.dateRange = [
+        moment().startOf('month')._d.toString(),
+        moment().endOf('month')._d.toString()
+      ];
     }
   },
   created() {
     this.fetchTransactions();
-    // this.$emit('page-ready', true);
+    this.setDefaultDateRange();
   }
 };
 </script>
@@ -209,5 +196,10 @@ export default {
 
 .style-button {
   width: 6rem;
+}
+
+.style-date-input {
+  max-width: 400px;
+  width: 100%;
 }
 </style>

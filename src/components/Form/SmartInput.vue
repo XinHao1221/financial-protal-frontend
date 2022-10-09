@@ -21,11 +21,22 @@
       :value="value"
       @input="$emit('update:value', $event.target.value)"
     />
+
+    <datepicker
+      v-if="type === 'dateRangePicker'"
+      v-model="dateRange"
+      range
+      format="dd/MM/yyyy"
+      preview-format="dd/MM/yyyy"
+      auto-apply
+    />
   </div>
 </template>
 
 <script>
 // import PasswordInputField from './PasswordInputField.vue';
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
   name: 'Input',
@@ -41,6 +52,17 @@ export default {
       type: String
     },
     value: String
+  },
+  components: { Datepicker },
+  computed: {
+    dateRange: {
+      set(value) {
+        this.$emit('update:value', value);
+      },
+      get() {
+        return this.value;
+      }
+    }
   }
 };
 </script>

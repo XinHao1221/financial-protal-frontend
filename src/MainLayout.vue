@@ -45,6 +45,11 @@ export default {
   name: 'MainLayout',
   components: { SideMenu, LoadingSpinner },
   mixins: [VueScreenSizeMixin],
+  provide() {
+    return {
+      getIsMobile: () => this.isMobileSize
+    };
+  },
   data() {
     return {
       sideMenuDisplay: null,

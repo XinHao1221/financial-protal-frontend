@@ -14,7 +14,7 @@ export default {
   props: {
     buttonText: {
       type: String,
-      required: true
+      required: false
     }
   },
   data() {
@@ -30,5 +30,6 @@ export default {
   color: white;
   font-weight: $bold;
   border-radius: 10px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
 }
 </style>
