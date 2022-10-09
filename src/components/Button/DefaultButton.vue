@@ -2,7 +2,9 @@
   <div
     class="style-button d-flex justify-content-center align-items-center scss-clickable"
   >
-    {{ buttonText }}
+    <span v-if="buttonText">{{ buttonText }}</span>
+
+    <slot></slot>
   </div>
 </template>
 

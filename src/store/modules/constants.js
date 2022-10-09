@@ -5,7 +5,8 @@ const state = {
 };
 
 const getters = {
-  constants: (state) => state.constants
+  accounts: (state) => state.constants.accounts,
+  categories: (state) => state.constants.categories
 };
 
 const actions = {
