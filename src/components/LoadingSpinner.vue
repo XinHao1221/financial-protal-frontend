@@ -4,6 +4,7 @@
       v-model:active="isLoading"
       :can-cancel="true"
       class="spinner-container"
+      color="#2dce89"
     />
   </div>
 </template>
