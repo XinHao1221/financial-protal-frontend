@@ -34,7 +34,9 @@ const routes = [
     path: '/',
     component: () => import('@/MainLayout.vue'),
     beforeEnter: async (to, from, next) => {
+      store.commit('showLoading', true);
       await store.dispatch('getConstant', null, { root: true });
+      store.commit('showLoading', false);
       return next();
     },
     meta: { requiresAuth: true },

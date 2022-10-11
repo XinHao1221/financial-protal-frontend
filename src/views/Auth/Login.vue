@@ -7,7 +7,7 @@
     </div>
 
     <!-- Login Form -->
-    <form style="width: 100%" @click.prevent="login">
+    <form style="width: 100%" @submit.prevent="login">
       <!-- Input fields -->
       <smart-input
         label="Email Address"
@@ -29,8 +29,6 @@
       <!-- Login button -->
       <default-button class="my-5 w-100" button-text="Sign In" />
     </form>
-
-    <!-- <loading-spinner /> -->
   </div>
 </template>
 
@@ -40,14 +38,13 @@ import DefaultButton from '../../components/Button/DefaultButton.vue';
 import { useToast } from 'vue-toastification';
 import { authRepo } from '@/api';
 import { setToken } from '@/api/AuthTokenService.js';
-// import LoadingSpinner from '../../components/LoadingSpinner.vue';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'login',
   components: {
     SmartInput,
     DefaultButton
-    // LoadingSpinner
   },
   data() {
     return {
@@ -57,6 +54,7 @@ export default {
   },
   methods: {
     async login() {
+      this.showLoading(true);
       try {
         const response = await authRepo.login({
           email: this.email,
@@ -64,15 +62,17 @@ export default {
         });
 
         setToken(response.data.access_token);
+        this.showLoading(false);
 
-        console.log('here');
         this.$router.push('/home');
       } catch (error) {
+        this.showLoading(false);
+
         useToast().error(error.message);
       }
-    }
-  },
-  created() {}
+    },
+    ...mapMutations(['showLoading'])
+  }
 };
 </script>
 

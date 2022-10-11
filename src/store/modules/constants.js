@@ -20,9 +20,7 @@ const actions = {
 };
 
 const mutations = {
-  getConstant: (state, payload) => {
-    state.constants = payload;
-  }
+  getConstant: (state, payload) => (state.constants = payload)
 };
 
 export default {

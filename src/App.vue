@@ -1,10 +1,18 @@
 <template>
+  <loading-spinner v-if="showLoading" />
   <router-view />
 </template>
 
 <script>
+import LoadingSpinner from '@/components/LoadingSpinner';
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'App',
+  components: { LoadingSpinner },
+  computed: {
+    ...mapGetters(['showLoading'])
+  },
   created() {
     const link = document.querySelector("[rel='icon']");
     link.setAttribute('href', './assets/images/logo/logo-icon.png');
