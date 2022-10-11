@@ -1,11 +1,11 @@
 <template>
-  <div
+  <button
     class="style-button d-flex justify-content-center align-items-center scss-clickable"
   >
     <span v-if="buttonText">{{ buttonText }}</span>
 
     <slot></slot>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -16,9 +16,6 @@ export default {
       type: String,
       required: false
     }
-  },
-  data() {
-    return {};
   }
 };
 </script>
@@ -31,5 +28,6 @@ export default {
   font-weight: $bold;
   border-radius: 10px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+  border: none;
 }
 </style>

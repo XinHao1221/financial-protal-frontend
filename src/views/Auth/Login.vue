@@ -7,7 +7,7 @@
     </div>
 
     <!-- Login Form -->
-    <div style="width: 100%">
+    <form style="width: 100%" @click.prevent="login">
       <!-- Input fields -->
       <smart-input
         label="Email Address"
@@ -27,10 +27,10 @@
       <div class="style-forgot-password">Forgot Password?</div>
 
       <!-- Login button -->
-      <default-button class="my-5" button-text="Sign In" @click="login" />
-    </div>
+      <default-button class="my-5 w-100" button-text="Sign In" />
+    </form>
 
-    <loading-spinner />
+    <!-- <loading-spinner /> -->
   </div>
 </template>
 
@@ -40,14 +40,14 @@ import DefaultButton from '../../components/Button/DefaultButton.vue';
 import { useToast } from 'vue-toastification';
 import { authRepo } from '@/api';
 import { setToken } from '@/api/AuthTokenService.js';
-import LoadingSpinner from '../../components/LoadingSpinner.vue';
+// import LoadingSpinner from '../../components/LoadingSpinner.vue';
 
 export default {
   name: 'login',
   components: {
     SmartInput,
-    DefaultButton,
-    LoadingSpinner
+    DefaultButton
+    // LoadingSpinner
   },
   data() {
     return {
