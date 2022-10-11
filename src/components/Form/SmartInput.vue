@@ -34,7 +34,6 @@
 </template>
 
 <script>
-// import PasswordInputField from './PasswordInputField.vue';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
