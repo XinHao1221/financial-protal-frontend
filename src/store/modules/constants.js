@@ -3,7 +3,6 @@ import { constantRepo } from '@/api';
 const state = {
   constants: null
 };
-
 const getters = {
   accounts: (state) => state.constants.accounts,
   categories: (state) => state.constants.categories
