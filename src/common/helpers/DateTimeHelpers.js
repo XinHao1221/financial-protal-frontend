@@ -26,8 +26,11 @@ const formatDate = ({
   return moment(date, format).format(outputFormat);
 };
 
-const formatTime = (time, format = dateTimeFormat.TIME_FORMAT) =>
-  moment(time).format(format);
+const formatTime = ({
+  time,
+  format = dateTimeFormat.API_DATE_TIME_FORMAT,
+  outputFormat = dateTimeFormat.TIME_FORMAT
+}) => moment(time, format).format(outputFormat);
 
 export {
   convertDateTimeToTimezone,

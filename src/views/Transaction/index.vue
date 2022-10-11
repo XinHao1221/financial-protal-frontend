@@ -126,10 +126,17 @@ export default {
             label: day,
             ...vueGoodTableSettings,
             children: this.transactions
-              .filter((data) => formatDate(day) === formatDate(data.datetime))
+              .filter(
+                (data) =>
+                  formatDate({ date: day.split(' ')[0] }) ===
+                  formatDate({
+                    date: data.datetime.split(' ')[1],
+                    format: dateTimeFormat.DATE_FORMAT
+                  })
+              ) // Compare 2022-05-08 11:50 AM === Sunday, 08/05/2022
               .map((data) => {
                 return {
-                  time: formatTime(data.datetime),
+                  time: formatTime({ time: data.datetime }),
                   type: this.getCategory(data.category_id),
                   account: this.getAccount(data.account_id),
                   amount: parseFloat(data.amount).toFixed(2),

@@ -50,7 +50,9 @@ export default {
     placeholder: {
       type: String
     },
-    value: String
+    value: {
+      type: [String, Array]
+    }
   },
   components: { Datepicker },
   computed: {
