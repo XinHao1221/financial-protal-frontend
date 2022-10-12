@@ -7,8 +7,8 @@
       type="text"
       class="scss-input-container"
       :placeholder="placeholder"
-      :value="value"
-      @input="$emit('update:value', $event.target.value)"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
 
     <!-- Password Input Fields -->
@@ -18,8 +18,8 @@
       type="password"
       class="scss-input-container"
       :placeholder="placeholder"
-      :value="value"
-      @input="$emit('update:value', $event.target.value)"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
 
     <datepicker
@@ -39,6 +39,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
   name: 'Input',
+  emits: ['update:modelValue'],
   props: {
     type: {
       type: String,
@@ -50,7 +51,7 @@ export default {
     placeholder: {
       type: String
     },
-    value: {
+    modelValue: {
       type: [String, Array]
     }
   },
@@ -58,10 +59,10 @@ export default {
   computed: {
     dateRange: {
       set(value) {
-        this.$emit('update:value', value);
+        this.$emit('update:modelValue', value);
       },
       get() {
-        return this.value;
+        return this.modelValue;
       }
     }
   }

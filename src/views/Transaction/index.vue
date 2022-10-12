@@ -8,7 +8,7 @@
           type="dateRangePicker"
           label="Date Range"
           class="style-date-input"
-          v-model:value="dateRange"
+          v-model="dateRange"
         />
         <div class="flex-grow-1">&nbsp;</div>
         <div v-if="!isMobile">

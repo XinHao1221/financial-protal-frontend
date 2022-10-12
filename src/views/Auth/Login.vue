@@ -13,14 +13,14 @@
         label="Email Address"
         placeholder="Email Address"
         class="mt-3"
-        v-model:value="email"
+        v-model="email"
       />
       <smart-input
         type="password"
         label="Password"
         placeholder="Password"
         class="mt-3"
-        v-model:value="password"
+        v-model="password"
       />
 
       <!-- Forgot password -->
