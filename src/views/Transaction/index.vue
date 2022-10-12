@@ -12,7 +12,7 @@
         />
         <div class="flex-grow-1">&nbsp;</div>
         <div v-if="!isMobile">
-          <default-button class="style-button">
+          <default-button class="style-button" @click="showModal = true">
             <i class="bi bi-plus-circle" style="font-size: 17px"></i>
             <span class="ms-2">Add</span>
           </default-button>
@@ -35,14 +35,23 @@
         </template>
       </vue-good-table>
     </div>
+
+    <modal v-model="showModal">
+      <template v-slot:header>Header</template>
+      <template v-slot:body>Content</template>
+    </modal>
   </div>
+
+  <!-- https://vue-final-modal.org/examples/stepByStep -->
 </template>
 
 <script>
 // import SmallCard from '../../components/SmallCard.vue';
 import { VueGoodTable } from 'vue-good-table-next';
 import 'vue-good-table-next/dist/vue-good-table-next.css';
+
 import { transactionRepo } from '@/api';
+
 import {
   convertDateTimeToTimezone,
   formatDate,
@@ -53,13 +62,20 @@ import { mapGetters } from 'vuex';
 import SmartInput from '../../components/Form/SmartInput.vue';
 import DefaultButton from '../../components/Button/DefaultButton.vue';
 import moment from 'moment-timezone';
+import Modal from '../../components/Modal.vue';
 
 export default {
   name: 'Transaction',
-  components: { VueGoodTable, SmartInput, DefaultButton },
+  components: {
+    VueGoodTable,
+    SmartInput,
+    DefaultButton,
+    Modal
+  },
   inject: ['getIsMobile'],
   data() {
     return {
+      showModal: false,
       incomeCardSettings: {
         title: 'INCOME  (Month)',
         content: 'RM 1200',
@@ -196,7 +212,6 @@ export default {
 .vgt-wrap {
   font-size: 17px;
 }
-
 .vgt-table {
   font-size: 17px;
 }

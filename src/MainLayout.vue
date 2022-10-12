@@ -122,7 +122,7 @@ export default {
   top: 0;
   left: 0;
   height: 100vh;
-  z-index: 100;
+  z-index: 10;
   transition: all 2s linear;
 }
 
@@ -130,7 +130,6 @@ export default {
   margin-left: 270px;
   transition: 0.5s;
   position: relative;
-  z-index: 0;
 }
 
 .screen-cover {
