@@ -36,13 +36,8 @@
       </vue-good-table>
     </div>
 
-    <modal v-model="showModal">
-      <template v-slot:header>Header</template>
-      <template v-slot:body>Content</template>
-    </modal>
+    <transaction-modal v-model="showModal" />
   </div>
-
-  <!-- https://vue-final-modal.org/examples/stepByStep -->
 </template>
 
 <script>
@@ -59,10 +54,10 @@ import {
 } from '@/common/helpers/DateTimeHelpers';
 import { dateTimeFormat } from '@/common/constant/DateTimeFormat';
 import { mapGetters } from 'vuex';
-import SmartInput from '../../components/Form/SmartInput.vue';
-import DefaultButton from '../../components/Button/DefaultButton.vue';
+import SmartInput from '@/components/Form/SmartInput.vue';
+import DefaultButton from '@/components/Button/DefaultButton.vue';
 import moment from 'moment-timezone';
-import Modal from '../../components/Modal.vue';
+import TransactionModal from './components/TransactionModal.vue';
 
 export default {
   name: 'Transaction',
@@ -70,7 +65,7 @@ export default {
     VueGoodTable,
     SmartInput,
     DefaultButton,
-    Modal
+    TransactionModal
   },
   inject: ['getIsMobile'],
   data() {

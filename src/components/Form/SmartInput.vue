@@ -22,6 +22,15 @@
       @input="$emit('update:modelValue', $event.target.value)"
     />
 
+    <!-- Textare for description -->
+    <textarea
+      v-if="type === 'description'"
+      :value="modelValue"
+      class="scss-input-container"
+      :rows="3"
+    ></textarea>
+
+    <!-- Date Range Picker -->
     <datepicker
       v-if="type === 'dateRangePicker'"
       v-model="dateRange"
@@ -80,6 +89,7 @@ input[type='text'] {
   border-color: rgb(197, 197, 197);
 }
 
+textarea:focus,
 input:focus {
   outline: none !important;
   border: 1px solid rgb(163, 163, 163);

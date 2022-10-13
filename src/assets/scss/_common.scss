@@ -4,8 +4,10 @@ $box_rounded: 1rem;
 .scss-input-container {
   border: 1px solid $border_color;
   border-radius: 5px;
-  height: 48px;
   padding-inline: 10px;
+}
+.scss-input-container:not(textarea) {
+  height: 48px;
 }
 
 .scss-rounded {

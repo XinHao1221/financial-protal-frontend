@@ -45,18 +45,18 @@ export default {
 </script>
 
 <style scoped>
-:deep .modal-container {
+:deep(.modal-container) {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-:deep .modal-content {
+:deep(.modal-content) {
   position: relative;
   display: flex;
   flex-direction: column;
   margin: 0 1rem;
-  padding: 1.5rem;
+  padding: 1.8rem 2rem;
   border: 1px solid #e2e8f0;
   border-radius: 0.25rem;
   background: #fff;
@@ -64,7 +64,7 @@ export default {
 }
 
 @media only screen and (max-width: 1000px) {
-  :deep .modal-content {
+  :deep(.modal-content) {
     width: 95%;
   }
 }
@@ -73,12 +73,13 @@ export default {
   font-size: 1.5rem;
   font-weight: 700;
   text-align: start;
+  margin-bottom: 30px;
 }
 
 .modal__close {
   position: absolute;
-  top: 1.5rem;
-  right: 1rem;
+  top: 1.8rem;
+  right: 1.8rem;
   font-size: 1.5rem;
 }
 </style>
