@@ -18,6 +18,7 @@
       :to="menu.link"
       v-slot="{ isActive }"
       style="text-decoration: none"
+      @click="$emit('route-changed')"
     >
       <div
         class="d-flex flex-row style-menu-item"

@@ -2,7 +2,10 @@
   <div id="app">
     <!-- Side Menu  -->
     <div class="side-menu" :style="{ display: sideMenuDisplay }">
-      <side-menu @close-sidemenu="toggleSideMenu" />
+      <side-menu
+        @close-sidemenu="toggleSideMenu"
+        @route-changed="handleRouteChange"
+      />
     </div>
     <!-- Content  -->
     <div
@@ -68,6 +71,11 @@ export default {
     },
     setPageStatus(value) {
       this.isPageReady = value;
+    },
+    handleRouteChange() {
+      if (this.isMobileSize) {
+        this.sideMenuDisplay = 'none';
+      }
     }
   },
   computed: {
@@ -139,9 +147,10 @@ export default {
   top: 0;
   left: 0;
   background-color: #323232;
-  z-index: 10;
+  z-index: 5;
   opacity: 0.5;
   transition: 0.5s;
+  height: 100vh;
 }
 
 .content-overflow-style {
