@@ -19,7 +19,10 @@
         </div>
       </div>
 
-      <div style="positon: relative">
+      <div style="position: relative">
+        <div class="test-spinner">
+          <loading-spinner v-if="showLoading" />
+        </div>
         <vue-good-table
           :columns="columns"
           :rows="populatedTransactions"
@@ -35,7 +38,6 @@
             </template>
           </template>
         </vue-good-table>
-        <loading-spinner v-if="false" />
       </div>
     </div>
 
@@ -77,6 +79,7 @@ export default {
   inject: ['getIsMobile'],
   data() {
     return {
+      showLoading: false,
       showModal: false,
       incomeCardSettings: {
         title: 'INCOME  (Month)',
@@ -179,6 +182,7 @@ export default {
       }
     },
     async fetchTransactions() {
+      this.showLoading = true;
       const startDate = convertDatetimePickerFormat(this.dateRange[0]);
       const endDate = convertDatetimePickerFormat(this.dateRange[1]);
 
@@ -192,8 +196,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-      // Set page to ready
-      this.$emit('page-ready', true);
+
+      this.showLoading = false;
     },
     getAccount(accountId) {
       return this.accounts.find((account) => account.id === accountId).name;
@@ -215,6 +219,8 @@ export default {
   },
   created() {
     this.setDefaultDateRange();
+    // Set page to ready
+    this.$emit('page-ready', true);
     this.fetchTransactions();
   }
 };
