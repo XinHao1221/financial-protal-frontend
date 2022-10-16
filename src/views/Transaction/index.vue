@@ -175,6 +175,11 @@ export default {
     },
     ...mapGetters(['accounts', 'categories'])
   },
+  watch: {
+    dateRange() {
+      this.fetchTransactions();
+    }
+  },
   methods: {
     getAmountStyle(props) {
       if (props.row.isIncome) {
@@ -219,8 +224,10 @@ export default {
   },
   created() {
     this.setDefaultDateRange();
+
     // Set page to ready
     this.$emit('page-ready', true);
+
     this.fetchTransactions();
   }
 };
