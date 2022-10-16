@@ -1,9 +1,9 @@
 <template>
   <div>
-    <modal v-model="showModal">
+    <modal v-model="showModal" :show-loading="showLoading">
       <template v-slot:header>Transaction</template>
       <template v-slot:body>
-        <form @click.prevent="saveTransaction">
+        <form @submit.prevent="saveTransaction">
           <smart-input
             type="datetimePicker"
             label="Date/Time"
@@ -78,7 +78,8 @@ export default {
       account: null,
       type: null,
       amount: null,
-      description: null
+      description: null,
+      showLoading: false
     };
   },
   methods: {
@@ -87,6 +88,8 @@ export default {
       this.datetime = new Date();
     },
     async saveTransaction() {
+      this.showLoading = true;
+
       const formattedDatetime = convertDatetimePickerFormat(this.datetime);
 
       try {
@@ -97,6 +100,9 @@ export default {
           category_id: this.type.id,
           datetime: convertDateTimeToUTC({ datetime: formattedDatetime })
         });
+
+        this.showLoading = false;
+        this.$emit('updated');
       } catch (error) {
         console.log(error);
       }

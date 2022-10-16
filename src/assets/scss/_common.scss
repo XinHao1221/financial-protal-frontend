@@ -17,6 +17,7 @@ $box_rounded: 1rem;
 .scss-shadow-container {
   box-shadow: $box_shadow;
   background: white;
+  overflow: hidden;
 }
 
 .scss-container {

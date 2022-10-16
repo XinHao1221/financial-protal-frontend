@@ -33,7 +33,11 @@
           </div>
         </div>
         <loading-spinner v-show="!isPageReady" />
-        <router-view @page-ready="setPageStatus" v-show="isPageReady" />
+        <router-view
+          @page-ready="setPageStatus"
+          v-show="isPageReady"
+          style="position: relative"
+        />
       </div>
     </div>
   </div>
@@ -137,7 +141,6 @@ export default {
 .content {
   margin-left: 270px;
   transition: 0.5s;
-  position: relative;
 }
 
 .screen-cover {

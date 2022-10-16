@@ -17,20 +17,24 @@
       <div class="modal_content">
         <slot name="body"></slot>
       </div>
+
+      <loading-spinner v-if="showLoading" />
     </vue-final-modal>
   </div>
 </template>
 
 <script>
 import { VueFinalModal } from 'vue-final-modal';
+import LoadingSpinner from './LoadingSpinner.vue';
 
 export default {
   name: 'Modal',
   emits: ['update:modelValue'],
   props: {
-    modelValue: Boolean
+    modelValue: Boolean,
+    showLoading: { type: Boolean, default: false }
   },
-  components: { VueFinalModal },
+  components: { VueFinalModal, LoadingSpinner },
   computed: {
     showModal: {
       set(value) {

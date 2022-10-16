@@ -19,24 +19,27 @@
         </div>
       </div>
 
-      <vue-good-table
-        :columns="columns"
-        :rows="populatedTransactions"
-        :sort-options="{ enabled: false }"
-        :group-options="{
-          enabled: true
-        }"
-        styleClass="vgt-table table table-hover mb-0"
-      >
-        <template v-slot:table-row="props">
-          <template v-if="props.column.field === 'amount'">
-            <span :class="getAmountStyle(props)">{{ props.row.amount }}</span>
+      <div style="positon: relative">
+        <vue-good-table
+          :columns="columns"
+          :rows="populatedTransactions"
+          :sort-options="{ enabled: false }"
+          :group-options="{
+            enabled: true
+          }"
+          styleClass="vgt-table table table-hover mb-0"
+        >
+          <template v-slot:table-row="props">
+            <template v-if="props.column.field === 'amount'">
+              <span :class="getAmountStyle(props)">{{ props.row.amount }}</span>
+            </template>
           </template>
-        </template>
-      </vue-good-table>
+        </vue-good-table>
+        <loading-spinner v-if="false" />
+      </div>
     </div>
 
-    <transaction-modal v-model="showModal" />
+    <transaction-modal v-model="showModal" @updated="refreshTransactionList" />
   </div>
 </template>
 
@@ -59,7 +62,8 @@ import SmartInput from '@/components/Form/SmartInput.vue';
 import DefaultButton from '@/components/Button/DefaultButton.vue';
 import moment from 'moment-timezone';
 import TransactionModal from './components/TransactionModal.vue';
-import { convertDateTimeToUTC } from '../../common/helpers/DateTimeHelpers';
+import { convertDateTimeToUTC } from '@/common/helpers/DateTimeHelpers';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default {
   name: 'Transaction',
@@ -67,7 +71,8 @@ export default {
     VueGoodTable,
     SmartInput,
     DefaultButton,
-    TransactionModal
+    TransactionModal,
+    LoadingSpinner
   },
   inject: ['getIsMobile'],
   data() {
@@ -202,6 +207,10 @@ export default {
         moment().startOf('month')._d,
         moment().endOf('month')._d
       ];
+    },
+    refreshTransactionList() {
+      this.showModal = false;
+      this.fetchTransactions();
     }
   },
   created() {
