@@ -3,10 +3,16 @@ $white: #fff;
 $black: #2c3e50;
 $light_black: #6c6c6c;
 $border_color: #afafaf;
+$red: #f23648;
+
 .scss-primary-color {
-    color: $primary_color;
+  color: $primary_color;
 }
 
 .scss-white-text {
-    color: $white;
+  color: $white;
+}
+
+.scss-red-text {
+  color: $red;
 }

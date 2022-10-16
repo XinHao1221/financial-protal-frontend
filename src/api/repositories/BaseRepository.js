@@ -14,7 +14,7 @@ class BaseRepository {
     }
   }
 
-  async post({ url, payload } = {}) {
+  async post({ url, payload }) {
     try {
       const response = await ApiClient.post(url, payload);
       return response.data;

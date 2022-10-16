@@ -11,11 +11,12 @@ const convertDateTimeToTimezone = ({
 };
 
 const convertDateTimeToUTC = ({
-  dateTime,
+  datetime,
   format = dateTimeFormat.API_DATE_TIME_FORMAT,
   outputFormat = dateTimeFormat.API_DATE_TIME_FORMAT
 }) => {
-  return moment(dateTime, format).utc().format(outputFormat);
+  console.log(datetime);
+  return moment(datetime, format).utc().format(outputFormat);
 };
 
 const formatDate = ({
@@ -32,9 +33,15 @@ const formatTime = ({
   outputFormat = dateTimeFormat.TIME_FORMAT
 }) => moment(time, format).format(outputFormat);
 
+const convertDatetimePickerFormat = (datetime) => {
+  return moment(datetime, dateTimeFormat.VUE_DATE_TIME_PICKER_FORMAT).format(
+    dateTimeFormat.API_DATE_TIME_FORMAT
+  );
+};
 export {
   convertDateTimeToTimezone,
   convertDateTimeToUTC,
   formatDate,
-  formatTime
+  formatTime,
+  convertDatetimePickerFormat
 };

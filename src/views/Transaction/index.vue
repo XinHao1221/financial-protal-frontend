@@ -49,6 +49,7 @@ import { transactionRepo } from '@/api';
 
 import {
   convertDateTimeToTimezone,
+  convertDatetimePickerFormat,
   formatDate,
   formatTime
 } from '@/common/helpers/DateTimeHelpers';
@@ -58,6 +59,7 @@ import SmartInput from '@/components/Form/SmartInput.vue';
 import DefaultButton from '@/components/Button/DefaultButton.vue';
 import moment from 'moment-timezone';
 import TransactionModal from './components/TransactionModal.vue';
+import { convertDateTimeToUTC } from '../../common/helpers/DateTimeHelpers';
 
 export default {
   name: 'Transaction',
@@ -172,9 +174,15 @@ export default {
       }
     },
     async fetchTransactions() {
+      const startDate = convertDatetimePickerFormat(this.dateRange[0]);
+      const endDate = convertDatetimePickerFormat(this.dateRange[1]);
+
       // Fetch data
       try {
-        const response = await transactionRepo.getTransactions();
+        const response = await transactionRepo.getTransactions(
+          convertDateTimeToUTC({ datetime: startDate }),
+          convertDateTimeToUTC({ datetime: endDate })
+        );
         this.transactions = response.data;
       } catch (error) {
         console.log(error);
@@ -191,14 +199,14 @@ export default {
     },
     setDefaultDateRange() {
       this.dateRange = [
-        moment().startOf('month')._d.toString(),
-        moment().endOf('month')._d.toString()
+        moment().startOf('month')._d,
+        moment().endOf('month')._d
       ];
     }
   },
   created() {
-    this.fetchTransactions();
     this.setDefaultDateRange();
+    this.fetchTransactions();
   }
 };
 </script>

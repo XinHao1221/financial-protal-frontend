@@ -1,26 +1,20 @@
 <template>
   <div class="d-flex flex-column mb-4">
-    <div class="input-label">{{ label }}</div>
+    <div class="input-label">
+      <span class="scss-bold">{{ label }}</span>
+      <span class="scss-red-text" v-if="required">&nbsp;*</span>
+    </div>
     <!-- Input Fields -->
-    <input
-      v-if="type === 'text'"
-      type="text"
-      class="scss-input-container"
-      :placeholder="placeholder"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
-    />
-
     <!-- Password Input Fields -->
     <!-- <password-input-field v-if="type === 'password'" /> -->
-    <input
+    <!-- <input
       v-if="type === 'password'"
       type="password"
       class="scss-input-container"
       :placeholder="placeholder"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
-    />
+    /> -->
 
     <!-- Textare for description -->
     <textarea
@@ -28,16 +22,61 @@
       :value="modelValue"
       class="scss-input-container"
       :rows="3"
+      @input="$emit('update:modelValue', $event.target.value)"
     ></textarea>
 
     <!-- Date Range Picker -->
     <datepicker
-      v-if="type === 'dateRangePicker'"
-      v-model="dateRange"
+      v-else-if="type === 'dateRangePicker'"
+      v-model="value"
       range
       format="dd/MM/yyyy"
       preview-format="dd/MM/yyyy"
       auto-apply
+      :enableTimePicker="false"
+    />
+
+    <!-- Date Range Picker -->
+    <datepicker
+      v-else-if="type === 'datetimePicker'"
+      v-model="value"
+      format="dd/MM/yyyy hh:mm a"
+      preview-format="dd/MM/yyyy hh:mm a"
+      auto-apply
+    />
+
+    <!-- Dropdown -->
+    <select
+      v-else-if="type === 'dropdown'"
+      :value="modelValue"
+      class="scss-input-container"
+      @input="$emit('update:modelValue', $event.target.value)"
+    >
+      <option
+        v-for="(option, index) in options"
+        :key="index"
+        :value="option.id"
+        :selected="index === 0"
+      >
+        {{ option.name }} {{ index }}
+      </option>
+    </select>
+
+    <!-- Multiple Select Dropdown -->
+    <MultiSelectDropdown
+      v-else-if="type === 'searchable-dropdown'"
+      :options="options"
+      v-model="value"
+    />
+
+    <!-- Others input type -->
+    <input
+      v-else
+      :type="type"
+      class="scss-input-container"
+      :placeholder="placeholder"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
 </template>
@@ -45,6 +84,7 @@
 <script>
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import MultiSelectDropdown from '@/components/Form/MultiSelectDropdown.vue';
 
 export default {
   name: 'Input',
@@ -60,13 +100,20 @@ export default {
     placeholder: {
       type: String
     },
+    options: {
+      type: Array
+    },
     modelValue: {
-      type: [String, Array]
+      type: [String, Array, Object, Date]
+    },
+    required: {
+      type: Boolean,
+      default: false
     }
   },
-  components: { Datepicker },
+  components: { Datepicker, MultiSelectDropdown },
   computed: {
-    dateRange: {
+    value: {
       set(value) {
         this.$emit('update:modelValue', value);
       },
@@ -80,7 +127,6 @@ export default {
 
 <style lang="scss" scoped>
 .input-label {
-  font-weight: $bold;
   text-align: start;
   margin-bottom: 3px;
 }
@@ -94,5 +140,17 @@ input:focus {
   outline: none !important;
   border: 1px solid rgb(163, 163, 163);
   box-shadow: $box-shadow;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }
 </style>
