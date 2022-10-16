@@ -11,7 +11,7 @@
           v-model="dateRange"
         />
         <div class="flex-grow-1">&nbsp;</div>
-        <div v-if="!isMobile">
+        <div>
           <default-button class="style-button" @click="showModal = true">
             <i class="bi bi-plus-circle" style="font-size: 17px"></i>
             <span class="ms-2">Add</span>
