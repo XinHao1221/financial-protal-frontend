@@ -42,8 +42,8 @@
     </div>
 
     <transaction-modal v-model="showModal" @updated="refreshTransactionList" />
+    <floating-button v-if="isMobile" @click="showModal = true" />
   </div>
-  <floating-button v-if="isMobile" @click="showModal = true" />
 </template>
 
 <script>

@@ -33,11 +33,7 @@
           </div>
         </div>
         <loading-spinner v-show="!isPageReady" />
-        <router-view
-          @page-ready="setPageStatus"
-          v-show="isPageReady"
-          style="position: relative"
-        />
+        <router-view @page-ready="setPageStatus" v-show="isPageReady" />
       </div>
     </div>
   </div>
@@ -117,7 +113,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 #app {
   min-width: 100%;
   min-height: 100vh;
