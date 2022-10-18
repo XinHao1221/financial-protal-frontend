@@ -19,7 +19,7 @@ export default {
   width: 75px;
   height: 75px;
   background-color: $primary_color;
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 20px;
   display: flex;
