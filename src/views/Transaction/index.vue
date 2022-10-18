@@ -149,9 +149,9 @@ export default {
             children: this.transactions
               .filter(
                 (data) =>
-                  formatDate({ date: day.split(' ')[0] }) ===
+                  formatDate({ date: data.datetime.split(' ')[0] }) ===
                   formatDate({
-                    date: data.datetime.split(' ')[1],
+                    date: day.split(' ')[1],
                     format: dateTimeFormat.DATE_FORMAT
                   })
               ) // Compare 2022-05-08 11:50 AM === Sunday, 08/05/2022

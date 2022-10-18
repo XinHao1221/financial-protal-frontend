@@ -15,7 +15,6 @@ const convertDateTimeToUTC = ({
   format = dateTimeFormat.API_DATE_TIME_FORMAT,
   outputFormat = dateTimeFormat.API_DATE_TIME_FORMAT
 }) => {
-  console.log(datetime);
   return moment(datetime, format).utc().format(outputFormat);
 };
 

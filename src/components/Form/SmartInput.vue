@@ -76,6 +76,7 @@
       class="scss-input-container"
       :placeholder="placeholder"
       :value="modelValue"
+      :step="type === 'number' ? 'any' : ''"
       @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
@@ -120,6 +121,9 @@ export default {
       get() {
         return this.modelValue;
       }
+    },
+    inputPattern() {
+      return this.type === 'number' ? 'pattern="^\d*(\.\d{0,2})?$' : '';
     }
   }
 };
