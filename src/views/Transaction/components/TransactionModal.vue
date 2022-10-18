@@ -36,7 +36,11 @@
             v-model="description"
           />
 
-          <default-button button-text="Save" class="w-100 mt-5" />
+          <default-button
+            button-text="Save"
+            class="w-100 mt-5"
+            :disabled="!isFormCompleted"
+          />
         </form>
       </template>
     </modal>
@@ -69,6 +73,9 @@ export default {
       get() {
         return this.modelValue;
       }
+    },
+    isFormCompleted() {
+      return ![null, ''].includes(this.amount);
     },
     ...mapGetters(['categories', 'accounts'])
   },
