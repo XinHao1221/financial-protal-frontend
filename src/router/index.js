@@ -68,7 +68,7 @@ router.beforeEach((to, from, next) => {
   if (requiresAuth && !isLogin) {
     next('/login');
   } else if (hideForAuth && isLogin) {
-    next('/home');
+    next('/transaction');
   } else {
     next();
   }
