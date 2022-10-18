@@ -34,6 +34,7 @@
       preview-format="dd/MM/yyyy"
       auto-apply
       :enableTimePicker="false"
+      :clearable="false"
     />
 
     <!-- Date Range Picker -->
@@ -43,6 +44,7 @@
       format="dd/MM/yyyy hh:mm a"
       preview-format="dd/MM/yyyy hh:mm a"
       auto-apply
+      :clearable="false"
     />
 
     <!-- Dropdown -->
