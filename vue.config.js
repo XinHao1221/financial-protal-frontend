@@ -11,5 +11,8 @@ module.exports = {
       args[0].title = 'FINS';
       return args;
     });
+  },
+  pwa: {
+    name: 'FINS'
   }
 };
