@@ -11,7 +11,7 @@
           v-model="dateRange"
         />
         <div class="flex-grow-1">&nbsp;</div>
-        <div>
+        <div v-if="!isMobile">
           <default-button class="style-button" @click="showModal = true">
             <i class="bi bi-plus-circle" style="font-size: 17px"></i>
             <span class="ms-2">Add</span>
@@ -43,6 +43,7 @@
 
     <transaction-modal v-model="showModal" @updated="refreshTransactionList" />
   </div>
+  <floating-button v-if="isMobile" @click="showModal = true" />
 </template>
 
 <script>
@@ -66,6 +67,7 @@ import moment from 'moment-timezone';
 import TransactionModal from './components/TransactionModal.vue';
 import { convertDateTimeToUTC } from '@/common/helpers/DateTimeHelpers';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import FloatingButton from '@/components/Button/FloatingButton.vue';
 
 export default {
   name: 'Transaction',
@@ -74,7 +76,8 @@ export default {
     SmartInput,
     DefaultButton,
     TransactionModal,
-    LoadingSpinner
+    LoadingSpinner,
+    FloatingButton
   },
   inject: ['getIsMobile'],
   data() {
