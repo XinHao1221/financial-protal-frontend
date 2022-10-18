@@ -4,7 +4,6 @@
       <span class="scss-bold">{{ label }}</span>
       <span class="scss-red-text" v-if="required">&nbsp;*</span>
     </div>
-    <!-- Input Fields -->
     <!-- Password Input Fields -->
     <!-- <password-input-field v-if="type === 'password'" /> -->
     <!-- <input
