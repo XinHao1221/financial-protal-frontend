@@ -26,6 +26,7 @@ export default {
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 2rem 0 rgb(136 152 170 / 50%);
+  z-index: 2;
 }
 
 .style-icon {
