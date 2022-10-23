@@ -21,15 +21,22 @@
         &nbsp;
       </div>
       <div class="p-4 flex-grow-1 content-overflow-style">
-        <div>
-          <div class="text-start">
-            <i
-              class="bi bi-list scss-clickable"
-              id="menu-icon"
-              style="font-size: 30px; color: white"
-              @click="toggleSideMenu"
+        <div class="mb-3">
+          <div class="d-flex flex-row align-items-center">
+            <div
+              class="text-start me-4"
               v-if="isMobileSize || !isSideMenuOpened"
-            ></i>
+            >
+              <i
+                class="bi bi-list scss-clickable"
+                id="menu-icon"
+                style="font-size: 30px; color: white"
+                @click="toggleSideMenu"
+              ></i>
+            </div>
+            <div class="page-title">
+              {{ pageTitle }}
+            </div>
           </div>
         </div>
         <loading-spinner v-show="!isPageReady" />
@@ -84,6 +91,9 @@ export default {
     },
     isSideMenuOpened() {
       return this.sideMenuDisplay === 'block';
+    },
+    pageTitle() {
+      return this.$router.currentRoute.value.fullPath.split('/')[1];
     }
   },
   watch: {
@@ -154,5 +164,11 @@ export default {
 
 .content-overflow-style {
   overflow-x: auto;
+}
+
+.page-title {
+  text-transform: capitalize;
+  font-size: 25px;
+  color: $white;
 }
 </style>
