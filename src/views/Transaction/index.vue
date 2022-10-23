@@ -1,8 +1,12 @@
 <template>
   <div>
-    <!-- <small-card :settings="incomeCardSettings" /> -->
+    <template v-for="data in incomeCardData" :key="data">
+      <small-card :settings="data" class="me-3 mb-3" style="float: left" />
+    </template>
 
-    <div class="scss-container mt-5" style="padding: 2rem">
+    <div style="clear: both">&nbsp;</div>
+
+    <div class="scss-container" style="padding: 2rem">
       <div class="d-flex flex-row">
         <smart-input
           type="dateRangePicker"
@@ -25,7 +29,7 @@
         </div>
         <vue-good-table
           :columns="columns"
-          :rows="populatedTransactions"
+          :rows="sortedPopulatedTransactions"
           :sort-options="{ enabled: false }"
           :group-options="{
             enabled: true
@@ -47,7 +51,7 @@
 </template>
 
 <script>
-// import SmallCard from '../../components/SmallCard.vue';
+import SmallCard from '../../components/SmallCard.vue';
 import { VueGoodTable } from 'vue-good-table-next';
 import 'vue-good-table-next/dist/vue-good-table-next.css';
 
@@ -77,26 +81,14 @@ export default {
     DefaultButton,
     TransactionModal,
     LoadingSpinner,
-    FloatingButton
+    FloatingButton,
+    SmallCard
   },
   inject: ['getIsMobile'],
   data() {
     return {
       showLoading: false,
       showModal: false,
-      incomeCardSettings: {
-        title: 'INCOME  (Month)',
-        content: 'RM 1200',
-        footer: {
-          content: '+RM200',
-          contentColorClass: 'scss-primary-color',
-          description: 'todays'
-        },
-        icon: {
-          iconClass: 'bi bi-cash-coin',
-          backgroundColor: '#ff0000'
-        }
-      },
       columns: [
         {
           label: 'Date/Time',
@@ -117,7 +109,8 @@ export default {
         }
       ],
       transactions: null,
-      dateRange: null
+      dateRange: null,
+      transactionSummary: null
     };
   },
   computed: {
@@ -173,14 +166,83 @@ export default {
         return acc;
       }, []);
     },
+    sortedPopulatedTransactions() {
+      const copy = this.populatedTransactions;
+
+      return copy.sort((a, b) => {
+        const formatedA = formatDate({
+          date: a.label.split(', ')[1],
+          format: dateTimeFormat.DATE_FORMAT,
+          outputFormat: dateTimeFormat.API_DATE_FORMAT
+        });
+        const formatedB = formatDate({
+          date: b.label.split(', ')[1],
+          format: dateTimeFormat.DATE_FORMAT,
+          outputFormat: dateTimeFormat.API_DATE_FORMAT
+        });
+
+        return new Date(formatedB) - new Date(formatedA);
+      });
+    },
     isMobile() {
       return this.getIsMobile();
+    },
+    incomeCardData() {
+      return [
+        {
+          title: 'INCOME  (Month)',
+          content: `RM ${parseFloat(
+            this.transactionSummary?.income_total
+          ).toFixed(2)}`,
+          footer: {
+            content: `+RM ${parseFloat(
+              this.transactionSummary?.todays_income
+            ).toFixed(2)}`,
+            contentColorClass: 'scss-primary-color',
+            description: 'todays'
+          },
+          icon: {
+            iconClass: 'bi bi-cash-coin',
+            backgroundColor: '#2dce89'
+          }
+        },
+        {
+          title: 'Expenses  (Month)',
+          content: `RM ${parseFloat(
+            this.transactionSummary?.expenses_total
+          ).toFixed(2)}`,
+          footer: {
+            content: `+RM ${parseFloat(
+              this.transactionSummary?.todays_expenses
+            ).toFixed(2)}`,
+            contentColorClass: 'scss-red-text',
+            description: 'todays'
+          },
+          icon: {
+            iconClass: 'bi bi-cash-coin',
+            backgroundColor: '#f23648'
+          }
+        },
+        {
+          title: 'Transaction',
+          content: this.transactionSummary?.total_transaction,
+          footer: {
+            content: `+ ${this.transactionSummary?.todays_transactions}`,
+            contentColorClass: 'scss-primary-color',
+            description: 'todays'
+          },
+          icon: {
+            iconClass: 'bi bi-wallet2',
+            backgroundColor: '#36b5ff'
+          }
+        }
+      ];
     },
     ...mapGetters(['accounts', 'categories'])
   },
   watch: {
     dateRange() {
-      this.fetchTransactions();
+      if (this.transactions != null) this.fetchTransactions();
     }
   },
   methods: {
@@ -207,6 +269,22 @@ export default {
 
       this.showLoading = false;
     },
+    async fetchTransactionSummary() {
+      const startDate = convertDatetimePickerFormat(this.dateRange[0]);
+      const endDate = convertDatetimePickerFormat(this.dateRange[1]);
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+      try {
+        const response = await transactionRepo.getTransactionSummary(
+          convertDateTimeToUTC({ datetime: startDate }),
+          convertDateTimeToUTC({ datetime: endDate }),
+          timezone
+        );
+        this.transactionSummary = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     getAccount(accountId) {
       return this.accounts.find((account) => account.id === accountId).name;
     },
@@ -223,15 +301,22 @@ export default {
     refreshTransactionList() {
       this.showModal = false;
       this.fetchTransactions();
+      this.fetchTransactionSummary();
+    },
+    async loadData() {
+      await Promise.all([
+        this.fetchTransactions(),
+        this.fetchTransactionSummary()
+      ]);
+
+      // Set page to ready
+      this.$emit('page-ready', true);
     }
   },
   created() {
     this.setDefaultDateRange();
 
-    // Set page to ready
-    this.$emit('page-ready', true);
-
-    this.fetchTransactions();
+    this.loadData();
   }
 };
 </script>

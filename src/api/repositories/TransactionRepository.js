@@ -16,6 +16,15 @@ class TransactionRepository extends BaseRepository {
       payload: payload
     });
   }
+
+  async getTransactionSummary(startDate, endDate, timezone = null) {
+    let url = `${endpointURL}/summary?start_date=${startDate}&end_date=${endDate}`;
+    url += timezone ? `&timezone=${timezone}` : '';
+
+    return this.get({
+      url: url
+    });
+  }
 }
 
 export default TransactionRepository;

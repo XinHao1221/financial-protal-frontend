@@ -15,7 +15,9 @@
     </div>
     <div
       class="rounded-circle style-icon-container"
-      :style="{ backgroundColor: settings.icon.backgroundColor }"
+      :style="{
+        backgroundColor: settings.icon.backgroundColor
+      }"
     >
       <i :class="settings.icon.iconClass"></i>
     </div>
@@ -30,9 +32,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-  data() {
-    return {};
   }
 };
 </script>
@@ -43,9 +42,24 @@ export default {
 }
 
 .scss-container {
-  /* min-width: 350px; */
-  max-width: 1000px;
-  width: 400px;
+  min-width: 350px;
+}
+
+@media only screen and (max-width: 800px) {
+  .scss-container {
+    width: 45%;
+    min-width: 280px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .scss-container {
+    min-width: 100%;
+  }
+
+  .scss-container > div > div {
+    line-height: 1.5;
+  }
 }
 
 .style-icon-container {
