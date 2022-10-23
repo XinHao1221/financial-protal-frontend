@@ -190,7 +190,7 @@ export default {
     incomeCardData() {
       return [
         {
-          title: 'INCOME  (Month)',
+          title: 'Income  (Month)',
           content: `RM ${parseFloat(
             this.transactionSummary?.income_total
           ).toFixed(2)}`,
