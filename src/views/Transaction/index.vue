@@ -68,10 +68,10 @@ import { mapGetters } from 'vuex';
 import SmartInput from '@/components/Form/SmartInput.vue';
 import DefaultButton from '@/components/Button/DefaultButton.vue';
 import moment from 'moment-timezone';
-import TransactionModal from './components/TransactionModal.vue';
 import { convertDateTimeToUTC } from '@/common/helpers/DateTimeHelpers';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import FloatingButton from '@/components/Button/FloatingButton.vue';
+import { defineAsyncComponent } from 'vue';
 
 export default {
   name: 'Transaction',
@@ -79,7 +79,9 @@ export default {
     VueGoodTable,
     SmartInput,
     DefaultButton,
-    TransactionModal,
+    TransactionModal: defineAsyncComponent(() =>
+      import('./components/TransactionModal.vue')
+    ),
     LoadingSpinner,
     FloatingButton,
     SmallCard
