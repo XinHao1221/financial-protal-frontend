@@ -117,6 +117,9 @@ export default {
   },
   created() {
     this.setDefaultDatetime();
+
+    // Assign latest new datetime always
+    setInterval(() => this.setDefaultDatetime(), 1000);
   }
 };
 </script>
