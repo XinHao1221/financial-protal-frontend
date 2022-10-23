@@ -236,7 +236,7 @@ export default {
           title: 'Total Transactions',
           content: this.transactionSummary?.total_transaction,
           footer: {
-            content: `+ ${this.transactionSummary?.todays_transactions}`,
+            content: `+${this.transactionSummary?.todays_transactions}`,
             contentColorClass: 'scss-primary-color',
             description: 'todays'
           },
