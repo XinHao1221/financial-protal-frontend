@@ -257,8 +257,10 @@ export default {
   methods: {
     getAmountStyle(props) {
       if (props.row.isIncome) {
-        return 'scss-primary-color scss-bold';
+        return 'scss-primary-color';
       }
+
+      return 'scss-red-text';
     },
     async fetchTransactions() {
       this.showLoading = true;
