@@ -224,7 +224,7 @@ export default {
           }
         },
         {
-          title: 'Transaction',
+          title: 'Total Transactions',
           content: this.transactionSummary?.total_transaction,
           footer: {
             content: `+ ${this.transactionSummary?.todays_transactions}`,
