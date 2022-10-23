@@ -28,7 +28,7 @@
               id="menu-icon"
               style="font-size: 30px; color: white"
               @click="toggleSideMenu"
-              v-if="!isSideMenuOpened"
+              v-if="isMobileSize || !isSideMenuOpened"
             ></i>
           </div>
         </div>
