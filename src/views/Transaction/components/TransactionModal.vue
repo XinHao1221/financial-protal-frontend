@@ -89,7 +89,7 @@ export default {
         },
         {
           id: 1,
-          text: 'Expenses',
+          text: 'Expense',
           color: '#f23648',
           value: 0
         }
