@@ -154,7 +154,6 @@ export default {
                   })
               ) // Compare 2022-05-08 11:50 AM === Sunday, 08/05/2022
               .sort((a, b) => {
-                console.log(b.datetime < a.datetime);
                 if (b.datetime < a.datetime) {
                   return -1;
                 }

@@ -1,6 +1,7 @@
 <template>
   <button
     class="style-button d-flex justify-content-center align-items-center scss-clickable"
+    :class="buttonClass ? buttonClass : 'scss-button-primary'"
     :disabled="disabled"
   >
     <span v-if="buttonText">{{ buttonText }}</span>
@@ -19,6 +20,10 @@ export default {
     },
     disabled: {
       type: Boolean
+    },
+    buttonClass: {
+      type: String,
+      required: false
     }
   }
 };
@@ -27,7 +32,6 @@ export default {
 <style lang="scss" scoped>
 .style-button {
   height: 48px;
-  background-color: $primary_color;
   color: white;
   font-weight: $bold;
   border-radius: 10px;

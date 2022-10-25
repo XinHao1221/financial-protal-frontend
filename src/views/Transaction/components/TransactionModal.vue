@@ -3,6 +3,10 @@
     <modal v-model="showModal" :show-loading="showLoading">
       <template v-slot:header>Transaction</template>
       <template v-slot:body>
+        <category-button
+          :buttons="categoryButtons"
+          @selected-tab="setSelectedTab"
+        />
         <form @submit.prevent="saveTransaction">
           <smart-input
             type="datetimePicker"
@@ -40,6 +44,7 @@
             button-text="Save"
             class="w-100 mt-5"
             :disabled="!isFormCompleted"
+            :button-class="buttonStyle"
           />
         </form>
       </template>
@@ -50,6 +55,7 @@
 <script>
 import Modal from '@/components/Modal.vue';
 import SmartInput from '@/components/Form/SmartInput.vue';
+import CategoryButton from '@/components/Button/CategoryButton.vue';
 import { mapGetters } from 'vuex';
 import DefaultButton from '@/components/Button/DefaultButton.vue';
 import { transactionRepo } from '@/api';
@@ -61,9 +67,34 @@ import {
 export default {
   name: 'TransactionModal',
   emits: ['update:modelValue'],
-  components: { Modal, SmartInput, DefaultButton },
+  components: { Modal, SmartInput, DefaultButton, CategoryButton },
   props: {
     modelValue: Boolean
+  },
+  data() {
+    return {
+      datetime: null,
+      account: null,
+      type: null,
+      amount: null,
+      description: null,
+      isIncome: 1,
+      showLoading: false,
+      categoryButtons: [
+        {
+          id: 0,
+          text: 'Income',
+          color: '#2dce89',
+          value: 1
+        },
+        {
+          id: 1,
+          text: 'Expenses',
+          color: '#f23648',
+          value: 0
+        }
+      ]
+    };
   },
   computed: {
     showModal: {
@@ -77,17 +108,10 @@ export default {
     isFormCompleted() {
       return ![null, ''].includes(this.amount);
     },
+    buttonStyle() {
+      return this.isIncome ? '' : 'scss-button-red';
+    },
     ...mapGetters(['categories', 'accounts'])
-  },
-  data() {
-    return {
-      datetime: null,
-      account: null,
-      type: null,
-      amount: null,
-      description: null,
-      showLoading: false
-    };
   },
   methods: {
     setDefaultDatetime() {
@@ -101,7 +125,7 @@ export default {
 
       try {
         await transactionRepo.addTransaction({
-          is_income: 0,
+          is_income: this.isIncome,
           amount: parseFloat(this.amount),
           account_id: this.account.id,
           category_id: this.type.id,
@@ -113,6 +137,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    setSelectedTab(event) {
+      this.isIncome = event.value;
     }
   },
   created() {
