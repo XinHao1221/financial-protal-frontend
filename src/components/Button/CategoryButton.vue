@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-row mb-4" style="gap: 5px">
+  <div class="d-flex flex-row mb-4" style="gap: 3px">
     <template v-for="button in buttons" :key="button">
       <div
         class="style-button d-flex justify-content-center align-items-center scss-clickable"
@@ -57,7 +57,7 @@ export default {
 
 <style lang="scss" scoped>
 .style-button {
-  height: 48px;
+  height: 40px;
   border-radius: 10px;
   flex: 1;
 }
