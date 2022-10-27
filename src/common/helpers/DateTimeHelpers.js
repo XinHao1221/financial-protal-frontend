@@ -33,9 +33,7 @@ const formatTime = ({
 }) => moment(time, format).format(outputFormat);
 
 const convertDatetimePickerFormat = (datetime) => {
-  return moment(datetime, dateTimeFormat.VUE_DATE_TIME_PICKER_FORMAT).format(
-    dateTimeFormat.API_DATE_TIME_FORMAT
-  );
+  return moment(datetime).format(dateTimeFormat.API_DATE_TIME_FORMAT);
 };
 export {
   convertDateTimeToTimezone,

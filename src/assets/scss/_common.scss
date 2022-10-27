@@ -36,6 +36,9 @@ $box_rounded: 1rem;
     opacity: 0.9;
     cursor: pointer;
   }
+  &:disabled {
+    pointer-events: none;
+  }
   &:active {
     opacity: 0.7;
     cursor: pointer;

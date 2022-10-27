@@ -19,12 +19,21 @@ export default {
     buttons: {
       type: Array,
       required: true
+    },
+    selectedTabId: {
+      type: Number,
+      required: true
     }
   },
-  data() {
-    return {
-      activeTab: null
-    };
+  computed: {
+    activeTab: {
+      set(value) {
+        this.$emit('onChange', value);
+      },
+      get() {
+        return this.selectedTabId;
+      }
+    }
   },
   methods: {
     getButtonStyle(buttonSetting) {
@@ -44,13 +53,19 @@ export default {
     },
     setTabAsSelected(buttonSetting) {
       this.activeTab = buttonSetting.id;
+    },
+    setDefaultActiveTab() {
+      if (this.initialOption) {
+        this.activeTab = this.initialOption;
+        return;
+      }
 
-      this.$emit('selected-tab', buttonSetting);
+      this.activeTab = this.buttons[0].id;
     }
   },
   created() {
     // set default active tab
-    this.activeTab = this.buttons[0].id;
+    // this.setDefaultActiveTab();
   }
 };
 </script>

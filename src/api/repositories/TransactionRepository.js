@@ -4,25 +4,34 @@ import { endpoint } from '@/common/constant/Endpoints';
 const endpointURL = endpoint.TRANSACTION;
 
 class TransactionRepository extends BaseRepository {
-  async getTransactions(startDate, endDate) {
-    return this.get({
-      url: `${endpointURL}?start_date=${startDate}&end_date=${endDate}`
-    });
+  constructor() {
+    super(endpointURL);
   }
 
-  async addTransaction(payload) {
-    return this.post({
-      url: endpointURL,
-      payload: payload
+  async getTransactions(startDate, endDate) {
+    return this.get({
+      url: `${endpointURL}`,
+      params: {
+        start_date: startDate,
+        end_date: endDate
+      }
     });
   }
 
   async getTransactionSummary(startDate, endDate, timezone = null) {
-    let url = `${endpointURL}/summary?start_date=${startDate}&end_date=${endDate}`;
-    url += timezone ? `&timezone=${timezone}` : '';
+    let params = {
+      start_date: startDate,
+      end_date: endDate
+    };
+
+    // If timezone exists
+    if (timezone) {
+      params['timezone'] = timezone;
+    }
 
     return this.get({
-      url: url
+      url: `${endpointURL}/summary`,
+      params: params
     });
   }
 }

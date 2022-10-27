@@ -1,22 +1,49 @@
 import ApiClient from '@/api/ApiClient';
 
 class BaseRepository {
-  // constructor(resource) {
-  //     this.resource = resource;
-  // }
+  endPointURL;
 
-  async get({ url }) {
+  constructor(endPointURL) {
+    this.endPointURL = endPointURL;
+  }
+
+  async get({ url, params }) {
     try {
-      const response = await ApiClient.get(url);
+      const response = await ApiClient.get(url ?? this.endPointURL, {
+        params
+      });
       return response.data;
     } catch (error) {
       return this.handleErrors(error);
     }
   }
 
+  async getById({ url, id }) {
+    try {
+      const response = await ApiClient.get(
+        `${url ?? `${this.endPointURL}`}/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      this.handleErrors(error);
+    }
+  }
+
   async post({ url, payload }) {
     try {
-      const response = await ApiClient.post(url, payload);
+      const response = await ApiClient.post(url ?? this.endPointURL, payload);
+      return response.data;
+    } catch (error) {
+      return this.handleErrors(error);
+    }
+  }
+
+  async update({ url, id, payload }) {
+    try {
+      const response = await ApiClient.put(
+        `${url ?? `${this.endPointURL}`}/${id}`,
+        payload
+      );
       return response.data;
     } catch (error) {
       return this.handleErrors(error);

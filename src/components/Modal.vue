@@ -4,6 +4,8 @@
       v-model="showModal"
       classes="modal-container"
       content-class="modal-content"
+      @before-close="beforeClose()"
+      @closed="$emit('closed')"
     >
       <!-- Close Button -->
       <div class="modal__close scss-clickable" @click="showModal = false">
@@ -29,10 +31,12 @@ import LoadingSpinner from './LoadingSpinner.vue';
 
 export default {
   name: 'Modal',
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'closed'],
   props: {
     modelValue: Boolean,
-    showLoading: { type: Boolean, default: false }
+    showLoading: { type: Boolean, default: false },
+    beforeOpen: { type: Function, required: false },
+    beforeClose: { type: Function, required: false }
   },
   components: { VueFinalModal, LoadingSpinner },
   computed: {

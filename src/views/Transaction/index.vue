@@ -34,6 +34,7 @@
           :group-options="{
             enabled: true
           }"
+          @row-click="transactionSelected"
           styleClass="vgt-table table table-hover mb-0"
         >
           <template v-slot:table-row="props">
@@ -45,13 +46,18 @@
       </div>
     </div>
 
-    <transaction-modal v-model="showModal" @updated="refreshTransactionList" />
+    <transaction-modal
+      v-model="showModal"
+      @updated="refreshTransactionList"
+      :edit-form-settings="editFormSettings"
+      @modal-closed="handleModalClosed"
+    />
     <floating-button v-if="isMobile" @click="showModal = true" />
   </div>
 </template>
 
 <script>
-import SmallCard from '../../components/SmallCard.vue';
+import SmallCard from '@/components/SmallCard.vue';
 import { VueGoodTable } from 'vue-good-table-next';
 import 'vue-good-table-next/dist/vue-good-table-next.css';
 
@@ -75,6 +81,7 @@ import { defineAsyncComponent } from 'vue';
 
 export default {
   name: 'Transaction',
+  emits: ['modal-closed'],
   components: {
     VueGoodTable,
     SmartInput,
@@ -112,7 +119,8 @@ export default {
       ],
       transactions: null,
       dateRange: null,
-      transactionSummary: null
+      transactionSummary: null,
+      editFormSettings: null
     };
   },
   computed: {
@@ -161,6 +169,7 @@ export default {
               })
               .map((data) => {
                 return {
+                  id: data.id,
                   time: formatTime({ time: data.datetime }),
                   type: this.getCategory(data.category_id),
                   account: this.getAccount(data.account_id),
@@ -301,6 +310,17 @@ export default {
     getCategory(categoryId) {
       return this.categories.find((category) => category.id === categoryId)
         .name;
+    },
+    handleModalClosed() {
+      this.editFormSettings = null;
+    },
+    transactionSelected(params) {
+      this.editFormSettings = {
+        id: params.row.id
+      };
+
+      // Show modal
+      this.showModal = true;
     },
     setDefaultDateRange() {
       this.dateRange = [
