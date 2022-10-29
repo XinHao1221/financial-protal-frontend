@@ -18,12 +18,12 @@ const routes = [
   //     import(/* webpackChunkName: "about" */ "../views/About.vue"),
   // },
   {
-    path: '/',
+    path: '',
     redirect: 'login',
     component: () => import('@/AuthLayout.vue'),
     children: [
       {
-        path: '/login',
+        path: 'login',
         name: 'login',
         component: () => import('../views/Auth/Login.vue'),
         meta: { hideForAuth: true }
@@ -31,7 +31,7 @@ const routes = [
     ]
   },
   {
-    path: '/',
+    path: '',
     component: () => import('@/MainLayout.vue'),
     beforeEnter: async (to, from, next) => {
       store.commit('showLoading', true);

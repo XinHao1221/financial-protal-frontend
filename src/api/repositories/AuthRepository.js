@@ -10,6 +10,12 @@ class AuthRepository extends BaseRepository {
       payload: payload
     });
   }
+
+  async logout() {
+    return this.post({
+      url: `${endpointURL}/logout`
+    });
+  }
 }
 
 export default AuthRepository;

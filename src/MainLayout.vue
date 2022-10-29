@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="app">
     <!-- Side Menu  -->
     <div class="side-menu" :style="{ display: sideMenuDisplay }">
       <side-menu
@@ -23,6 +23,7 @@
       <div class="p-4 flex-grow-1 content-overflow-style">
         <div class="mb-3">
           <div class="d-flex flex-row align-items-center">
+            <!-- Expand button -->
             <div
               class="text-start me-4"
               v-if="isMobileSize || !isSideMenuOpened"
@@ -34,8 +35,14 @@
                 @click="toggleSideMenu"
               ></i>
             </div>
+            <!-- Page Title -->
             <div class="page-title">
               {{ pageTitle }}
+            </div>
+            <div class="d-flex flex-grow-1">&nbsp;</div>
+            <!-- Profile Name -->
+            <div>
+              <profile-label />
             </div>
           </div>
         </div>
@@ -50,10 +57,11 @@
 import SideMenu from './components/SideMenu.vue';
 import { VueScreenSizeMixin } from 'vue-screen-size';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import ProfileLabel from './components/ProfileLabel.vue';
 
 export default {
   name: 'MainLayout',
-  components: { SideMenu, LoadingSpinner },
+  components: { SideMenu, LoadingSpinner, ProfileLabel },
   mixins: [VueScreenSizeMixin],
   provide() {
     return {
@@ -124,7 +132,7 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
+.app {
   min-width: 100%;
   min-height: 100vh;
   background: linear-gradient(
