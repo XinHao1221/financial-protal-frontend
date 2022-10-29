@@ -9,7 +9,7 @@
       <template v-slot:header>
         <span>Transaction</span>
         <div class="style-delete-icon" v-if="isEditForm">
-          <i class="bi bi-trash3"></i>
+          <i class="bi bi-trash3" @click="deleteTransaction"></i>
         </div>
       </template>
       <template v-slot:body>
@@ -228,6 +228,12 @@ export default {
         console.log(error);
       }
       this.showLoading = false;
+    },
+    async deleteTransaction() {
+      this.showLoading = true;
+      await transactionRepo.delete({ id: this.editFormSettings.id });
+      this.showLoading = false;
+      this.$emit('updated');
     },
     handleModalClosed() {
       this.$emit('modal-closed');

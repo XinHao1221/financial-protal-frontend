@@ -50,6 +50,17 @@ class BaseRepository {
     }
   }
 
+  async delete({ url, id }) {
+    try {
+      const response = await ApiClient.delete(
+        `${url ?? `${this.endPointURL}`}/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      this.handleErrors(error);
+    }
+  }
+
   handleErrors(error) {
     let errorMessage = 'Opps Something went wrong. Please try again.';
 
