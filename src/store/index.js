@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
 import constants from './modules/constants';
 import settings from './modules/settings';
+import profile from './modules/profile';
 
 export default createStore({
   state: {},
@@ -8,6 +9,7 @@ export default createStore({
   actions: {},
   modules: {
     constants,
-    settings
+    settings,
+    profile
   }
 });

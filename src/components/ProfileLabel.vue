@@ -4,7 +4,9 @@
       <!-- <div class="me-2 style-profile-icon">
         <i class="bi bi-person-fill"></i>
       </div> -->
-      <span class="style-font">Xin Hao</span>
+      <span class="style-font text-truncate" style="width: 90px">{{
+        profile.name
+      }}</span>
     </div>
     <div
       class="dropdown-toggle dropdown-toggle-split style-font ms-1"
@@ -25,9 +27,13 @@
 <script>
 import { authRepo } from '@/api';
 import { removeToken } from '@/api/AuthTokenService.js';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'ProfileLabel',
+  computed: {
+    ...mapGetters(['profile'])
+  },
   methods: {
     async logout() {
       try {
@@ -68,9 +74,6 @@ export default {
 .style-font {
   color: $white;
   font-size: $font_medium;
-}
-
-.style-profile-name {
 }
 
 .dropdown-toggle {

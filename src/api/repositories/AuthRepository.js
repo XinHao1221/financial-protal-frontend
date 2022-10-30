@@ -16,6 +16,12 @@ class AuthRepository extends BaseRepository {
       url: `${endpointURL}/logout`
     });
   }
+
+  async getUserInfo() {
+    return this.get({
+      url: `${endpointURL}/me`
+    });
+  }
 }
 
 export default AuthRepository;

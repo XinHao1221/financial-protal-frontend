@@ -81,7 +81,7 @@ import { defineAsyncComponent } from 'vue';
 
 export default {
   name: 'Transaction',
-  emits: ['modal-closed'],
+  emits: ['page-ready'],
   components: {
     VueGoodTable,
     SmartInput,

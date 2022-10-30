@@ -78,7 +78,7 @@ import {
 
 export default {
   name: 'TransactionModal',
-  emits: ['update:modelValue', 'modal-closed'],
+  emits: ['update:modelValue', 'modal-closed', 'updated'],
   components: { Modal, SmartInput, DefaultButton, CategoryButton },
   props: {
     modelValue: Boolean,
@@ -224,6 +224,9 @@ export default {
         );
         this.amount = parseFloat(data.amount).toFixed(2);
         this.description = data.description;
+        this.selectedTabID = this.categoryButtons.find(
+          (button) => button.value === data.is_income
+        ).id;
       } catch (error) {
         console.log(error);
       }
