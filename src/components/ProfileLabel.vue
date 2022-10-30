@@ -15,7 +15,7 @@
     >
       <span class="visually-hidden">Toggle Dropdown</span>
     </div>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu scss-shadow-container">
       <li class="scss-clickable"><i class="bi bi-person-fill"></i> Profile</li>
       <li class="scss-clickable" @click="logout">
         <i class="bi bi-box-arrow-right scss-red-text"></i>

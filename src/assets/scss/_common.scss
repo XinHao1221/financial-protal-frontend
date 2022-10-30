@@ -16,14 +16,14 @@ $box_rounded: 1rem;
 
 .scss-shadow-container {
   box-shadow: $box_shadow;
-  background: white;
+  background: $white;
   overflow: hidden;
 }
 
 .scss-container {
   border-radius: 1rem;
   box-shadow: $box_shadow;
-  background: white;
+  background: $white;
 }
 .scss-clickable {
   transition: 0.3s;
