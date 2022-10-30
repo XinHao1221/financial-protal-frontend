@@ -54,6 +54,8 @@ export default {
 
 <style lang="scss" scoped>
 .dropdown-menu {
+  border-style: 1px groove $border-color;
+
   li {
     color: $black;
     height: 45px;
