@@ -64,7 +64,7 @@ export default {
         setToken(response.data.access_token);
         this.showLoading(false);
 
-        this.$router.push('/home');
+        this.$router.push('/transaction');
       } catch (error) {
         this.showLoading(false);
 

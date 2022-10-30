@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 2500px">test</div>
+  <div style="height: 2500px">Welcome to Fins</div>
 </template>
 
 <script>
