@@ -241,7 +241,7 @@ export default {
           }
         },
         {
-          title: 'Total Transactions',
+          title: 'Transactions (Month)',
           content: this.transactionSummary?.total_transaction,
           footer: {
             content: `+${this.transactionSummary?.todays_transactions}`,
