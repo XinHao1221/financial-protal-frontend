@@ -15,7 +15,14 @@
     <div class="col-xl-6 d-none d-xl-block image-container">
       <img src="./assets/images/auth-background.jpg" class="style-image" />
       <div class="overlay-container"></div>
-      <div class="overlay-text">Hello World</div>
+      <div class="overlay-text">
+        <div class="d-flex flex-column">
+          <div class="text-center title">FINS</div>
+          <div class="text-center flex-grow-1 content mt-2">
+            Save money. Save reputation.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -77,13 +84,20 @@ export default {
 
 .overlay-text {
   position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
-  top: 0;
+  border-radius: 50%;
   color: white;
-  font-size: $font_large;
-  font-weight: $bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+  .title {
+    font-size: $font_large;
+    font-weight: $bold;
+  }
+
+  .content {
+    font-size: 1.7rem;
+  }
 }
 </style>

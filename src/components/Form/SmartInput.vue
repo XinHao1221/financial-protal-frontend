@@ -80,6 +80,10 @@
       :step="type === 'number' ? 'any' : ''"
       @input="$emit('update:modelValue', $event.target.value)"
     />
+
+    <div v-show="validationMessage" class="style-validation-message">
+      {{ validationMessage }}
+    </div>
   </div>
 </template>
 
@@ -111,6 +115,9 @@ export default {
     required: {
       type: Boolean,
       default: false
+    },
+    validationMessage: {
+      type: String
     }
   },
   components: { Datepicker, MultiSelectDropdown },
@@ -157,5 +164,10 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+.style-validation-message {
+  color: $red;
+  text-align: start;
 }
 </style>

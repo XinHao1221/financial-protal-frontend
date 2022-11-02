@@ -7,50 +7,82 @@
     </div>
 
     <!-- Login Form -->
-    <form style="width: 100%" @submit.prevent="login">
+    <Form
+      style="width: 100%"
+      @submit="login"
+      :validation-schema="validationSchema"
+    >
       <!-- Input fields -->
-      <smart-input
-        label="Email Address"
-        placeholder="Email Address"
-        class="mt-3"
-        v-model="email"
-      />
-      <smart-input
-        type="password"
-        label="Password"
-        placeholder="Password"
-        class="mt-3"
-        v-model="password"
-      />
+      <Field name="email" v-slot="{ handleChange, errorMessage }">
+        <smart-input
+          label="Email Address"
+          placeholder="Email Address"
+          class="mt-3"
+          v-model="email"
+          @update:modelValue="handleChange"
+          :validationMessage="errorMessage"
+        />
+      </Field>
 
+      <Field name="password" v-slot="{ handleChange, errorMessage }">
+        <smart-input
+          type="password"
+          label="Password"
+          placeholder="Password"
+          class="mt-3"
+          v-model="password"
+          @update:modelValue="handleChange"
+          :validationMessage="errorMessage"
+        />
+      </Field>
       <!-- Forgot password -->
-      <div class="style-forgot-password">Forgot Password?</div>
+      <div
+        class="style-forgot-password scss-clickable"
+        @click="goToForgotPassword"
+      >
+        Forgot Password?
+      </div>
 
       <!-- Login button -->
       <default-button class="my-5 w-100" button-text="Sign In" />
-    </form>
+    </Form>
   </div>
 </template>
 
 <script>
-import SmartInput from '../../components/Form/SmartInput.vue';
-import DefaultButton from '../../components/Button/DefaultButton.vue';
+import SmartInput from '@/components/Form/SmartInput.vue';
+import DefaultButton from '@/components/Button/DefaultButton.vue';
+
 import { useToast } from 'vue-toastification';
 import { authRepo } from '@/api';
 import { setToken } from '@/api/AuthTokenService.js';
 import { mapMutations } from 'vuex';
+import { validationRules } from '@/common/validation/validationRules';
+
+import { Form, Field } from 'vee-validate';
+import * as yup from 'yup';
 
 export default {
   name: 'login',
   components: {
     SmartInput,
-    DefaultButton
+    DefaultButton,
+    Form,
+    Field
   },
   data() {
     return {
       email: null,
       password: null
     };
+  },
+  computed: {
+    validationSchema() {
+      return yup.object({
+        email: validationRules.email,
+        password: validationRules.required
+      });
+    }
   },
   methods: {
     async login() {
@@ -71,9 +103,11 @@ export default {
         useToast().error(error.message);
       }
     },
+    goToForgotPassword() {
+      this.$router.push('/forgot-password');
+    },
     ...mapMutations(['showLoading'])
-  },
-  created() {}
+  }
 };
 </script>
 
@@ -88,9 +122,5 @@ export default {
   color: $primary_color;
   margin-top: -10px;
   text-align: start;
-}
-
-.style-forgot-password:hover {
-  cursor: pointer;
 }
 </style>

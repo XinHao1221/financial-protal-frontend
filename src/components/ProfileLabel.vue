@@ -4,7 +4,7 @@
       <!-- <div class="me-2 style-profile-icon">
         <i class="bi bi-person-fill"></i>
       </div> -->
-      <span class="style-font text-truncate" style="width: 90px">{{
+      <span class="style-font text-truncate text-end" style="width: 90px">{{
         profile.name
       }}</span>
     </div>
@@ -51,6 +51,8 @@ export default {
   }
 };
 </script>
+
+//Save money. Save reputation.
 
 <style lang="scss" scoped>
 .dropdown-menu {

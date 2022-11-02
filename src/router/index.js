@@ -27,6 +27,11 @@ const routes = [
         name: 'login',
         component: () => import('../views/Auth/Login.vue'),
         meta: { hideForAuth: true }
+      },
+      {
+        path: 'forgot-password',
+        name: 'Forgot Password',
+        component: () => import('../views/Auth/ForgotPassword.vue')
       }
     ]
   },
