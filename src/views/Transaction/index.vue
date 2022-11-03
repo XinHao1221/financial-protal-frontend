@@ -27,22 +27,19 @@
         <div class="test-spinner">
           <loading-spinner v-if="showLoading" />
         </div>
-        <vue-good-table
+        <!-- Transaction List -->
+        <data-table
           :columns="columns"
           :rows="sortedPopulatedTransactions"
-          :sort-options="{ enabled: false }"
-          :group-options="{
-            enabled: true
-          }"
+          :group-options-enabled="true"
           @row-click="transactionSelected"
-          styleClass="vgt-table table table-hover mb-0"
         >
-          <template v-slot:table-row="props">
+          <template v-slot:table-row="{ props }">
             <template v-if="props.column.field === 'amount'">
               <span :class="getAmountStyle(props)">{{ props.row.amount }}</span>
             </template>
           </template>
-        </vue-good-table>
+        </data-table>
       </div>
     </div>
 
@@ -58,8 +55,7 @@
 
 <script>
 import SmallCard from '@/components/SmallCard.vue';
-import { VueGoodTable } from 'vue-good-table-next';
-import 'vue-good-table-next/dist/vue-good-table-next.css';
+import DataTable from '@/components/DataTable.vue';
 
 import { transactionRepo } from '@/api';
 
@@ -83,7 +79,6 @@ export default {
   name: 'Transaction',
   emits: ['page-ready'],
   components: {
-    VueGoodTable,
     SmartInput,
     DefaultButton,
     TransactionModal: defineAsyncComponent(() =>
@@ -91,7 +86,8 @@ export default {
     ),
     LoadingSpinner,
     FloatingButton,
-    SmallCard
+    SmallCard,
+    DataTable
   },
   inject: ['getIsMobile'],
   data() {
@@ -352,13 +348,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.vgt-wrap {
-  font-size: 17px;
-}
-.vgt-table {
-  font-size: 17px;
-}
-
 .style-button {
   width: 6rem;
 }

@@ -55,12 +55,17 @@ const routes = [
       {
         path: 'home',
         name: 'home',
-        component: () => import('../views/Home/index.vue')
+        component: () => import('../views/Home')
       },
       {
         path: 'transaction',
         name: 'transaction',
-        component: () => import('../views/Transaction/index.vue')
+        component: () => import('../views/Transaction')
+      },
+      {
+        path: 'account',
+        name: 'account',
+        component: () => import('../views/Account')
       }
     ]
   }

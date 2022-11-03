@@ -73,6 +73,12 @@ export default {
           //     link: '/transaction/cash-out'
           //   }
           // ]
+        },
+        {
+          name: 'Account',
+          iconClass: 'bi bi-journal-text',
+          link: '/account',
+          color: '#f2b202'
         }
       ]
     };
